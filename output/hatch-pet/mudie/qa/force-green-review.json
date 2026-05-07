@@ -1,0 +1,12 @@
+{
+  "ok": false,
+  "rows": [
+    {
+      "state": "idle",
+      "errors": [
+        "The run chroma key is changing from #FF00FF to #00FF00 because the approved pet uses pink-violet hair that conflicts with magenta-background QA. Regenerate idle on the new green chroma key so all final rows use the same background."
+      ],
+      "warnings": []
+    }
+  ]
+}

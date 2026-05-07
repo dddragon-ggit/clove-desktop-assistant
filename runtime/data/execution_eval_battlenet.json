@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-04-28T14:02:35.810971+00:00",
+  "mode": "execution_eval",
+  "suite": "desktop_execution",
+  "ai_backend": "real",
+  "executor": "windows",
+  "provider_config": {
+    "provider_name": "OpenAI",
+    "base_url": "https://www.fhl.mom",
+    "wire_api": "responses",
+    "model": "gpt-5.4",
+    "review_model": "gpt-5.4",
+    "reasoning_effort": "xhigh",
+    "disable_response_storage": true,
+    "api_key_masked": "sk-2...6e4a",
+    "config_path": "D:\\Cursor_project\\4_interesting\\runtime\\data\\model_provider.json",
+    "loaded_from": "file",
+    "timeout": 120.0,
+    "max_retries": 2,
+    "retry_backoff_seconds": 0.5
+  },
+  "summary": {
+    "total": 1,
+    "planning_passed": 1,
+    "execution_attempted": 1,
+    "execution_passed": 1,
+    "verification_required": 1,
+    "verification_passed": 1,
+    "full_passed": 1,
+    "full_failed": 0,
+    "failed_case_ids": [],
+    "runtime_failed": 0,
+    "fallback_calls": 0
+  },
+  "results": [
+    {
+      "case_id": "open_battlenet_app",
+      "request": "打开战网应用",
+      "ok": true,
+      "trace_id": "57284f85-1454-475e-a162-435f0a58fc0b",
+      "workflow_status": "dry_run_ready",
+      "fallback_calls": 0,
+      "planner": {
+        "requires_clarification": false,
+        "risk_guess": "low",
+        "plan_name": "打开暴雪战网",
+        "steps": [
+          {
+            "action_type": "open_app",
+            "target": "暴雪战网",
+            "risk_level": "low",
+            "reason": "用户请求打开本机已安装的战网应用，且应用清单中已明确匹配到“暴雪战网”。"
+          }
+        ]
+      },
+      "policy": {
+        "approved": true,
+        "risk_level": "low",
+        "requires_user_confirmation": false,
+        "issue_codes": [],
+        "issues": []
+      },
+      "review": {
+        "approved": true,
+        "risk_level": "low",
+        "needs_user_confirmation": false,
+        "summary": "计划与用户“打开战网应用”的请求一致，使用了允许的 open_app 动作，目标“暴雪战网”及可执行路径已具体到可安全执行的程度，且不涉及脚本、Shell 或破坏性操作。",
+        "issues": [],
+        "rejection_reason": null
+      },
+      "category": "local_app",
+      "notes": "",
+      "planning_ok": true,
+      "planning_checks": [
+        {
+          "code": "workflow_status",
+          "passed": true,
+          "message": "workflow_status=dry_run_ready; allowed=['dry_run_ready']"
+        },
+        {
+          "code": "expected_action_prefix",
+          "passed": true,
+          "message": "expected prefix=['open_app']; actual=['open_app']"
+        },
+        {
+          "code": "forbidden_action_type:open_url",
+          "passed": true,
+          "message": "forbidden action open_url; actual=['open_app']"
+        },
+        {
+          "code": "forbidden_action_type:answer_query",
+          "passed": true,
+          "message": "forbidden action answer_query; actual=['open_app']"
+        },
+        {
+          "code": "forbidden_action_type:show_tasks",
+          "passed": true,
+          "message": "forbidden action show_tasks; actual=['open_app']"
+        },
+        {
+          "code": "forbidden_action_type:create_reminder",
+          "passed": true,
+          "message": "forbidden action create_reminder; actual=['open_app']"
+        },
+        {
+          "code": "max_steps",
+          "passed": true,
+          "message": "expected at most 1 step(s); actual=1"
+        },
+        {
+          "code": "policy_approved",
+          "passed": true,
+          "message": "expected policy.approved=True; actual=True"
+        },
+        {
+          "code": "review_approved",
+          "passed": true,
+          "message": "expected review.approved=True; actual=True"
+        },
+        {
+          "code": "planner_clarification",
+          "passed": true,
+          "message": "expected planner.requires_clarification=False; actual=False"
+        }
+      ],
+      "failed_planning_checks": [],
+      "execution_attempted": true,
+      "execution_ok": true,
+      "verification_required": true,
+      "verification_ok": true,
+      "full_ok": true,
+      "execution_trace": {
+        "trace_id": "57284f85-1454-475e-a162-435f0a58fc0b",
+        "status": "completed",
+        "recovery_attempts": 0,
+        "step_results": [
+          {
+            "step_index": 0,
+            "action_type": "open_app",
+            "target": "暴雪战网",
+            "status": "success",
+            "message": "[57284f85-1454-475e-a162-435f0a58fc0b] App 暴雪战网 is already running; already running; focus was rejected by Windows: 战网——聊天与群组",
+            "diagnosis": null
+          }
+        ]
+      }
+    }
+  ]
+}

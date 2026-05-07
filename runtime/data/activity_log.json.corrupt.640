@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-04T00:32:48.578862+00:00",
+  "records": [
+    {
+      "captured_at": "2026-05-04T00:32:48.563033+00:00",
+      "active_window": {
+        "hwnd": 131748,
+        "title": "Windows 默认锁屏界面",
+        "process_id": 15084,
+        "executable_path": "C:\\Windows\\SystemApps\\Microsoft.LockApp_cw5n1h2txyewy\\LockApp.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "XboxPcAppCE",
+        "executable_path": "C:\\Program Files\\WindowsApps\\Microsoft.GamingApp_2604.1001.9.0_x64__8wekyb3d8bbwe\\XboxPcAppCE.exe",
+        "process_id": 15084,
+        "source": "inventory_title",
+        "confidence": "medium"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "qa",
+          "path": "D:\\Cursor_project\\4_interesting\\output\\hatch-pet\\mudie\\qa",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "contact-sheet.png",
+          "path": "D:\\Cursor_project\\4_interesting\\output\\hatch-pet\\mudie\\qa\\contact-sheet.png",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1739679113&ProcessId=106872&WindowId=2758394",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    }
+  ]
+}e": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    }
+  ]
+}

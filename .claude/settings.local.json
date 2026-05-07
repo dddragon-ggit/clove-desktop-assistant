@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/d/anaconda3/envs/app/python.exe -m desktop_assistant --mode dry_run --request \"开始做周报\" --storage sqlite --ai-backend real)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m desktop_assistant --mode dry_run --request \"打开 Chrome 浏览器\" --storage sqlite --ai-backend real)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m desktop_assistant --mode dry_run --request \"打开百度搜索今天的天气\" --storage sqlite --ai-backend real)"
+    ]
+  }
+}

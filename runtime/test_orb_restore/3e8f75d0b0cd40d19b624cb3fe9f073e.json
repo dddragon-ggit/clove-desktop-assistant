@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-04-30T08:33:26.354100+00:00",
+  "state": {
+    "mode": "panel",
+    "panel": {
+      "x": 0,
+      "y": 0,
+      "width": 380,
+      "height": 240
+    },
+    "orb": {
+      "x": 0,
+      "y": 0
+    },
+    "orb_hidden": false,
+    "opacity": 0.9,
+    "blur_enabled": true,
+    "updated_at": "2026-04-30T08:33:26.354100+00:00"
+  }
+}

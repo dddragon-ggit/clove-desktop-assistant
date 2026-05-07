@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-03T23:57:48.975946+00:00",
+  "prediction": {
+    "suggested_text": "继续确认工作区：工作环境建议",
+    "route_hint": "workspace",
+    "confidence": "high",
+    "source": "pending_workspace",
+    "target_id": "c7e480e5-0c65-4e97-a511-dfa7d169a0a6",
+    "target_label": "工作环境建议",
+    "generated_at": "2026-05-03T23:57:48.975946+00:00",
+    "reasons": [
+      "A workspace suggestion is still pending confirmation."
+    ]
+  }
+}

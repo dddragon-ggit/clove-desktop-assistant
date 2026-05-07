@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest discover -s tests -v)",
+      "Bash(grep -n \"Low.*bug\\\\|Low.*severity\\\\|Low severity\" \"C:\\\\Users\\\\27426\\\\.claude\\\\projects\\\\d--Cursor-project-4-interesting\\\\32787538-f8d2-4f60-93c3-652b0857415e.jsonl\" 2>/dev/null | head -20)",
+      "Read(//c/Users/27426/.claude/projects/d--Cursor-project-4-interesting/**)",
+      "Bash(D:/Anaconda/envs/app/python.exe -m compileall -q desktop_assistant tests)",
+      "Bash(\"D:/Anaconda/envs/app/python.exe\" -m compileall -q desktop_assistant tests)",
+      "Read(//d/Anaconda/envs/app/**)",
+      "Read(//d/anaconda3/envs/app/**)",
+      "Bash(conda env *)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m compileall -q desktop_assistant tests)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest discover -s tests)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_ui_shell.AssistantShellWindowTests.test_todo_list_click_opens_detail_and_uses_urgency_colors)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_windows_executor.WindowsExecutorTests.test_close_window_can_match_by_hwnd)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_windows_executor)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_ui_shell)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_habits.NextActionPredictionTests.test_predictor_uses_same_hour_habit_when_not_current_context)",
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_openai_responses.OpenAIResponsesAdapterTests.test_primary_error_uses_single_fallback_path)"
+    ]
+  }
+}

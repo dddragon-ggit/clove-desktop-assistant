@@ -1,0 +1,502 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-07T15:37:35.876805+00:00",
+  "capabilities": [
+    {
+      "action_type": "open_app",
+      "title": "Open local application",
+      "description": "Open an installed Windows application from app_inventory.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Display name or alias of an installed local app."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "executable_path": {
+            "type": "string"
+          },
+          "app_inventory_source": {
+            "type": "string"
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.open_app",
+      "safety_rules": [
+        "Must resolve through app_inventory before execution.",
+        "Shell-like apps such as PowerShell, cmd, and terminal are blocked."
+      ],
+      "planner_guidance": [
+        "Use exact app_inventory display names when possible."
+      ]
+    },
+    {
+      "action_type": "focus_app",
+      "title": "Focus local application",
+      "description": "Bring an already running installed Windows application window to the foreground.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Display name or alias of an installed local app."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.focus_app",
+      "safety_rules": [
+        "Must resolve through app_inventory before execution.",
+        "Only focuses an existing visible window; it does not launch the app."
+      ],
+      "planner_guidance": [
+        "Use focus_app when the user asks to switch to or return to an app."
+      ]
+    },
+    {
+      "action_type": "list_windows",
+      "title": "List visible windows",
+      "description": "Inspect currently visible top-level desktop windows without changing them.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Window scope, usually visible."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "limit": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 100
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.list_windows",
+      "safety_rules": [
+        "Read-only desktop state inspection; does not focus, close, or modify windows."
+      ],
+      "planner_guidance": [
+        "Use before focus_app when the user asks what is open or target window state is unclear."
+      ]
+    },
+    {
+      "action_type": "focus_window",
+      "title": "Focus window",
+      "description": "Bring a specific existing desktop window to the foreground by title, app name, or hwnd.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Window title, installed app name, or hwnd:<number>."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "hwnd": {
+            "type": "integer"
+          },
+          "match_mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "hwnd",
+              "title",
+              "app"
+            ]
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.focus_window",
+      "safety_rules": [
+        "Only changes foreground focus; does not launch apps or close windows."
+      ],
+      "planner_guidance": [
+        "Use for explicit window-title focus requests or when app_inventory matching is uncertain."
+      ]
+    },
+    {
+      "action_type": "minimize_window",
+      "title": "Minimize window",
+      "description": "Minimize a specific existing desktop window by title, app name, or hwnd.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Window title, installed app name, or hwnd:<number>."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "hwnd": {
+            "type": "integer"
+          },
+          "match_mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "hwnd",
+              "title",
+              "app"
+            ]
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.minimize_window",
+      "safety_rules": [
+        "Only changes window state; does not close or modify app data."
+      ],
+      "planner_guidance": [
+        "Use when the user asks to hide or minimize a window/application."
+      ]
+    },
+    {
+      "action_type": "maximize_window",
+      "title": "Maximize window",
+      "description": "Maximize a specific existing desktop window by title, app name, or hwnd.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Window title, installed app name, or hwnd:<number>."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "hwnd": {
+            "type": "integer"
+          },
+          "match_mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "hwnd",
+              "title",
+              "app"
+            ]
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.maximize_window",
+      "safety_rules": [
+        "Only changes window state; does not close or modify app data."
+      ],
+      "planner_guidance": [
+        "Use when the user asks to maximize or enlarge a window/application."
+      ]
+    },
+    {
+      "action_type": "restore_window",
+      "title": "Restore window",
+      "description": "Restore a minimized or maximized desktop window to normal visible state.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Window title, installed app name, or hwnd:<number>."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "hwnd": {
+            "type": "integer"
+          },
+          "match_mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "hwnd",
+              "title",
+              "app"
+            ]
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.restore_window",
+      "safety_rules": [
+        "Only changes window state; does not close or modify app data."
+      ],
+      "planner_guidance": [
+        "Use when the user asks to restore, show, or unminimize an existing window/application."
+      ]
+    },
+    {
+      "action_type": "close_window",
+      "title": "Close window",
+      "description": "Request a specific desktop window to close by title, app name, or hwnd.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Window title, installed app name, or hwnd:<number>."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "hwnd": {
+            "type": "integer"
+          },
+          "match_mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "hwnd",
+              "title",
+              "app"
+            ]
+          }
+        }
+      },
+      "default_risk": "medium",
+      "execution_mode": "real",
+      "handler_name": "windows.close_window",
+      "safety_rules": [
+        "May trigger unsaved-work prompts or close an application window.",
+        "Requires action-level confirmation unless trusted."
+      ],
+      "planner_guidance": [
+        "Use only when the user explicitly asks to close a window/application."
+      ]
+    },
+    {
+      "action_type": "open_url",
+      "title": "Open URL",
+      "description": "Open a web URL in the default browser.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "HTTP or HTTPS URL.",
+        "pattern": "^https?://"
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.open_url",
+      "safety_rules": [
+        "Only http and https URLs are accepted."
+      ],
+      "planner_guidance": [
+        "Use search URLs when the exact domain is uncertain."
+      ]
+    },
+    {
+      "action_type": "open_project",
+      "title": "Open project or known folder",
+      "description": "Open a known project or common user folder from projects.json.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Project name, known folder name, or existing folder path."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "project_catalog_source": {
+            "type": "string"
+          },
+          "resolved_path": {
+            "type": "string"
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.open_project",
+      "safety_rules": [
+        "Only opens existing folders; never creates, deletes, or modifies files."
+      ],
+      "planner_guidance": [
+        "Use for Desktop, Downloads, Documents, current workspace, and named local projects."
+      ]
+    },
+    {
+      "action_type": "open_folder",
+      "title": "Open folder",
+      "description": "Open an existing local folder.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Existing local folder path or Desktop."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.open_folder",
+      "safety_rules": [
+        "Never create, delete, or modify files."
+      ],
+      "planner_guidance": []
+    },
+    {
+      "action_type": "open_file",
+      "title": "Open file",
+      "description": "Open an existing local file.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Existing local file path."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "windows.open_file",
+      "safety_rules": [
+        "Never create, delete, or modify files."
+      ],
+      "planner_guidance": []
+    },
+    {
+      "action_type": "answer_query",
+      "title": "Answer information query",
+      "description": "Fetch a direct web-backed answer and return it in the assistant UI.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Search or information query."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "source_url": {
+            "type": "string"
+          },
+          "fallback_url": {
+            "type": "string"
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "web.answer_query",
+      "safety_rules": [
+        "Only performs read-only web information lookup."
+      ],
+      "planner_guidance": [
+        "Use this for weather, prices, news, and factual lookups before open_url."
+      ]
+    },
+    {
+      "action_type": "show_tasks",
+      "title": "Show tasks",
+      "description": "Show or summarize task items in the assistant UI.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Task range such as today or this_week."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "todo.show_tasks",
+      "safety_rules": [],
+      "planner_guidance": []
+    },
+    {
+      "action_type": "restore_workspace",
+      "title": "Restore workspace",
+      "description": "Restore a previously known workspace layout.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Workspace name."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {}
+      },
+      "default_risk": "medium",
+      "execution_mode": "disabled",
+      "handler_name": "",
+      "safety_rules": [
+        "Prototype does not yet perform real workspace restoration."
+      ],
+      "planner_guidance": []
+    },
+    {
+      "action_type": "create_reminder",
+      "title": "Create reminder",
+      "description": "Create a lightweight reminder in the assistant.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Reminder time or label."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "minutes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "real",
+      "handler_name": "todo.create_reminder",
+      "safety_rules": [],
+      "planner_guidance": []
+    },
+    {
+      "action_type": "start_focus_timer",
+      "title": "Start focus timer",
+      "description": "Start a focus timer.",
+      "target_schema": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Timer duration such as 25m."
+      },
+      "params_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "minutes": {
+            "type": "integer",
+            "minimum": 1
+          }
+        }
+      },
+      "default_risk": "low",
+      "execution_mode": "simulated",
+      "handler_name": "simulated",
+      "safety_rules": [],
+      "planner_guidance": []
+    }
+  ]
+}

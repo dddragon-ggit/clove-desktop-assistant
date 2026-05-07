@@ -1,0 +1,10 @@
+{
+  "ok": true,
+  "run_dir": "D:\\Cursor_project\\4_interesting\\output\\hatch-pet\\mudie",
+  "spritesheet": "D:\\Cursor_project\\4_interesting\\output\\hatch-pet\\mudie\\final\\spritesheet.webp",
+  "validation": "D:\\Cursor_project\\4_interesting\\output\\hatch-pet\\mudie\\final\\validation.json",
+  "contact_sheet": "D:\\Cursor_project\\4_interesting\\output\\hatch-pet\\mudie\\qa\\contact-sheet.png",
+  "review": "D:\\Cursor_project\\4_interesting\\output\\hatch-pet\\mudie\\qa\\review.json",
+  "videos": null,
+  "package": "D:\\Cursor_project\\4_interesting\\runtime\\pets\\mudie"
+}

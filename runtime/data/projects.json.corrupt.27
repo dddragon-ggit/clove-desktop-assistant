@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-03T09:35:57.556275+00:00",
+  "projects": [
+    {
+      "name": "current workspace",
+      "path": "D:\\Cursor_project\\4_interesting",
+      "kind": "project",
+      "description": "Current assistant workspace."
+    },
+    {
+      "name": "desktop",
+      "path": "C:\\Users\\27426\\Desktop",
+      "kind": "folder",
+      "description": "User desktop folder."
+    },
+    {
+      "name": "documents",
+      "path": "C:\\Users\\27426\\Documents",
+      "kind": "folder",
+      "description": "User documents folder."
+    },
+    {
+      "name": "downloads",
+      "path": "C:\\Users\\27426\\Downloads",
+      "kind": "folder",
+      "description": "User downloads folder."
+    }
+  ]
+}

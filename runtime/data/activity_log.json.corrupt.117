@@ -1,0 +1,153 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-02T20:09:48.257990+00:00",
+  "records": [
+    {
+      "captured_at": "2026-05-02T20:09:48.228435+00:00",
+      "active_window": {
+        "hwnd": 131748,
+        "title": "Windows 默认锁屏界面",
+        "process_id": 15084,
+        "executable_path": "C:\\Windows\\SystemApps\\Microsoft.LockApp_cw5n1h2txyewy\\LockApp.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "XboxPcAppCE",
+        "executable_path": "C:\\Program Files\\WindowsApps\\Microsoft.GamingApp_2604.1001.9.0_x64__8wekyb3d8bbwe\\XboxPcAppCE.exe",
+        "process_id": 15084,
+        "source": "inventory_title",
+        "confidence": "medium"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "buweishui_48000_2_s16le.pcm",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug\\buweishui_48000_2_s16le.pcm",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "test-av",
+          "path": "D:\\音视频应用资料\\资料\\03-05FFmpeg命令实战\\test-av\\test-av",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2_rtsp_publish",
+          "path": "D:\\Qt_project\\2_rtsp_publish",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "屏幕截图 2026-05-01 172042.png",
+          "path": "C:\\Users\\27426\\Desktop\\屏幕截图 2026-05-01 172042.png",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1739679113&ProcessId=85132&WindowId=3019970",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1635723607&ProcessId=74672&WindowId=11013950",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1635723607&ProcessId=87936&WindowId=19992892",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=75912&WindowId=5901720",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1635723607&ProcessId=80140&WindowId=1444234",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文.pdf",
+          "path": "D:\\毕设\\我的无人机论文.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": ".codex",
+          "path": "C:\\Users\\27426\\.codex",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "auth.json",
+          "path": "C:\\Users\\27426\\.codex\\auth.json",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "test1",
+          "path": "D:\\Qt_project\\test1",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "main.c",
+          "path": "D:\\Qt_project\\test1\\main.c",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    }
+  ]
+}e": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    }
+  ]
+}

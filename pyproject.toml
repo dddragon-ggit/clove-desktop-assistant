@@ -1,0 +1,27 @@
+[project]
+name = "desktop-assistant"
+version = "0.1.0"
+description = "A debug-first desktop assistant prototype."
+readme = "docs/desktop-assistant-spec.md"
+requires-python = ">=3.12"
+dependencies = [
+  "pydantic>=2.7,<3.0",
+  "httpx>=0.27,<1.0",
+  "pywin32>=306; platform_system == 'Windows'",
+]
+
+[project.optional-dependencies]
+gui = [
+  "PySide6>=6.7,<7.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["desktop_assistant*"]
+exclude = ["runtime*", "tests*", "docs*"]
+
+[tool.setuptools.package-data]
+desktop_assistant = ["prompts/*.txt", "prompts/*.json"]

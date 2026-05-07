@@ -1,0 +1,2 @@
+"""Desktop assistant prototype package."""
+

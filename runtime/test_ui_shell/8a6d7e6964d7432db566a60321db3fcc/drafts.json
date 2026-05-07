@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-04T17:06:46.434027+00:00",
+  "drafts": [
+    {
+      "suggestion": {
+        "id": "15d53ee2-017b-428c-ad71-b9210418b047",
+        "goal": "打开 https://example.com",
+        "title": "工作环境建议",
+        "summary": "建议执行 1 个动作。",
+        "resources": [
+          {
+            "kind": "url",
+            "target": "https://example.com",
+            "title": "https://example.com",
+            "reason": "打开用户提到的网页。",
+            "action_type": "open_url"
+          }
+        ],
+        "plan": {
+          "plan_name": "goal_workspace",
+          "source": "workspace_suggestion",
+          "steps": [
+            {
+              "action_type": "open_url",
+              "target": "https://example.com",
+              "params": {},
+              "risk_level": "low",
+              "reason": "打开用户提到的网页。"
+            }
+          ]
+        },
+        "source": "goal_workspace",
+        "created_at": "2026-05-04T17:06:46.433782+00:00",
+        "user_feedback": []
+      },
+      "status": "pending",
+      "created_at": "2026-05-04T17:06:46.434002+00:00",
+      "updated_at": "2026-05-04T17:06:46.433968+00:00"
+    }
+  ]
+}

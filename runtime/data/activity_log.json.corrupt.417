@@ -1,0 +1,2281 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-05-03T12:58:48.711688+00:00",
+  "records": [
+    {
+      "captured_at": "2026-05-03T12:56:24.060415+00:00",
+      "active_window": {
+        "hwnd": 6949212,
+        "title": "VALORANT  ",
+        "process_id": 96296,
+        "executable_path": "",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "无畏契约",
+        "executable_path": "D:\\VALORANT\\ACLOS\\aclos-launcher.exe",
+        "process_id": 96296,
+        "source": "inventory_title",
+        "confidence": "medium"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:56:48.584529+00:00",
+      "active_window": {
+        "hwnd": 2365140,
+        "title": "扩展: Codex – OpenAI’s coding agent - 4_interesting - Cursor",
+        "process_id": 109684,
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "Cursor",
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "process_id": 109684,
+        "source": "inventory_executable",
+        "confidence": "high"
+      },
+      "active_file": null,
+      "active_project": {
+        "name": "current workspace",
+        "path": "D:\\Cursor_project\\4_interesting",
+        "kind": "project",
+        "source": "process_command_line",
+        "confidence": "high"
+      },
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:56:48.652477+00:00",
+      "active_window": {
+        "hwnd": 2365140,
+        "title": "扩展: Codex – OpenAI’s coding agent - 4_interesting - Cursor",
+        "process_id": 109684,
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "Cursor",
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "process_id": 109684,
+        "source": "inventory_executable",
+        "confidence": "high"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [
+        "project_catalog_unavailable: JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+      ],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:57:06.959876+00:00",
+      "active_window": {
+        "hwnd": 2365140,
+        "title": "扩展: Codex – OpenAI’s coding agent - 4_interesting - Cursor",
+        "process_id": 109684,
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "Cursor",
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "process_id": 109684,
+        "source": "inventory_executable",
+        "confidence": "high"
+      },
+      "active_file": null,
+      "active_project": {
+        "name": "current workspace",
+        "path": "D:\\Cursor_project\\4_interesting",
+        "kind": "project",
+        "source": "process_command_line",
+        "confidence": "high"
+      },
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:57:35.303041+00:00",
+      "active_window": {
+        "hwnd": 6949212,
+        "title": "VALORANT  ",
+        "process_id": 96296,
+        "executable_path": "",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "无畏契约",
+        "executable_path": "D:\\VALORANT\\ACLOS\\aclos-launcher.exe",
+        "process_id": 96296,
+        "source": "inventory_title",
+        "confidence": "medium"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:57:47.392349+00:00",
+      "active_window": null,
+      "active_app": null,
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:57:52.846508+00:00",
+      "active_window": {
+        "hwnd": 29692320,
+        "title": "4_interesting 和 2 个其他选项卡 - 文件资源管理器",
+        "process_id": 10056,
+        "executable_path": "C:\\Windows\\explorer.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "Windows Software Development Kit",
+        "executable_path": "C:\\Windows\\explorer.exe",
+        "process_id": 10056,
+        "source": "inventory_executable",
+        "confidence": "high"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:57:57.481553+00:00",
+      "active_window": {
+        "hwnd": 2365140,
+        "title": "扩展: Codex – OpenAI’s coding agent - 4_interesting - Cursor",
+        "process_id": 109684,
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "Cursor",
+        "executable_path": "D:\\Cursor\\cursor\\Cursor.exe",
+        "process_id": 109684,
+        "source": "inventory_executable",
+        "confidence": "high"
+      },
+      "active_file": null,
+      "active_project": {
+        "name": "current workspace",
+        "path": "D:\\Cursor_project\\4_interesting",
+        "kind": "project",
+        "source": "process_command_line",
+        "confidence": "high"
+      },
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:57:58.665205+00:00",
+      "active_window": {
+        "hwnd": 29753588,
+        "title": "战绩结算弹窗",
+        "process_id": 89592,
+        "executable_path": "",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "战绩结算弹窗",
+        "executable_path": "",
+        "process_id": 89592,
+        "source": "window_process",
+        "confidence": "low"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:58:04.560037+00:00",
+      "active_window": {
+        "hwnd": 727530,
+        "title": "无畏契约登录器",
+        "process_id": 89592,
+        "executable_path": "",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "无畏契约",
+        "executable_path": "D:\\VALORANT\\ACLOS\\aclos-launcher.exe",
+        "process_id": 89592,
+        "source": "inventory_title",
+        "confidence": "medium"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:58:06.242322+00:00",
+      "active_window": null,
+      "active_app": null,
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:58:06.432525+00:00",
+      "active_window": {
+        "hwnd": 65844,
+        "title": "Program Manager",
+        "process_id": 10056,
+        "executable_path": "C:\\Windows\\explorer.exe",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "Windows Software Development Kit",
+        "executable_path": "C:\\Windows\\explorer.exe",
+        "process_id": 10056,
+        "source": "inventory_executable",
+        "confidence": "high"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:58:06.552518+00:00",
+      "active_window": null,
+      "active_app": null,
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:58:23.968836+00:00",
+      "active_window": {
+        "hwnd": 29692320,
+        "title": "4_interesting 和 2 个其他选项卡 - 文件资源管理器",
+        "process_id": 10056,
+        "executable_path": "C:\\Windows\\explorer.exe",
+        "is_minimized": true,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "Windows Software Development Kit",
+        "executable_path": "C:\\Windows\\explorer.exe",
+        "process_id": 10056,
+        "source": "inventory_executable",
+        "confidence": "high"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:58:34.630693+00:00",
+      "active_window": null,
+      "active_app": null,
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    },
+    {
+      "captured_at": "2026-05-03T12:58:48.699344+00:00",
+      "active_window": {
+        "hwnd": 1120474,
+        "title": "三角洲行动",
+        "process_id": 108760,
+        "executable_path": "",
+        "is_minimized": false,
+        "is_maximized": false
+      },
+      "active_app": {
+        "name": "三角洲行动",
+        "executable_path": "D:\\Delta Force\\launcher\\delta_force_launcher.exe",
+        "process_id": 108760,
+        "source": "inventory_title",
+        "confidence": "medium"
+      },
+      "active_file": null,
+      "active_project": null,
+      "recent_files": [
+        {
+          "name": "ms-gamingoverlay--- (3)",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=96296&WindowId=6949212",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "5_毕业论文降重",
+          "path": "D:\\Cursor_project\\5_毕业论文降重",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "ms-settingskeyboard",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "ms-gamingoverlay--startuptips-TitleId=1856764962&ProcessId=91468&WindowId=30741632",
+          "path": "",
+          "source": "windows_recent_shortcut",
+          "confidence": "low"
+        },
+        {
+          "name": "我的无人机论文_第四版.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_第四版.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设",
+          "path": "D:\\毕设",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "毕设论文v2.docx",
+          "path": "D:\\毕设\\毕设论文v2.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_第四版_检测报告.zip",
+          "path": "D:\\downloads_long\\我的无人机论文_第四版_检测报告.zip",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档 (2).txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档 (2).txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "新建 文本文档.txt",
+          "path": "C:\\Users\\27426\\Desktop\\新建 文本文档.txt",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "path": "D:\\毕设\\本科生毕业设计论文摘要模板（内部） OCR.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "2026-04",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "本科生毕业设计论文摘要模板（内部）.pdf",
+          "path": "D:\\Wechat\\Message\\xwechat_files\\wxid_ala6u4v2uodo22_42ab\\msg\\file\\2026-04\\本科生毕业设计论文摘要模板（内部）.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "李易霖归档材料.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\李易霖归档材料.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new_老师意见.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new_老师意见.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.pdf",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.pdf",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "我的无人机论文_new.docx",
+          "path": "D:\\Cursor_project\\5_毕业论文降重\\我的无人机论文_new.docx",
+          "source": "windows_recent",
+          "confidence": "medium"
+        },
+        {
+          "name": "Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "path": "D:\\Qt_project\\2_rtsp_publish\\build\\Desktop_Qt_6_10_2_MinGW_64_bit-Debug",
+          "source": "windows_recent",
+          "confidence": "medium"
+        }
+      ],
+      "notes": [],
+      "privacy_scope": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    }
+  ]
+}e": "app/window/file/project metadata only; no keystrokes, screenshots, or document content"
+    }
+  ]
+}

@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#7c5cbf">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="./manifest.json">
+  <title>待办同步</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg: #1a1625;
+      --surface: #241f33;
+      --surface2: #2d2741;
+      --accent: #7c5cbf;
+      --accent-light: #a78bfa;
+      --text: #e8e0f0;
+      --text2: #9b8fb8;
+      --danger: #ef4444;
+      --success: #22c55e;
+      --orange: #f97316;
+      --radius: 12px;
+    }
+    body {
+      font-family: -apple-system, "Microsoft YaHei UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      padding: 0 0 100px 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+    header {
+      background: linear-gradient(135deg, var(--accent), #5b3a9e);
+      padding: 20px 16px 16px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      font-size: 20px;
+      font-weight: 600;
+    }
+    header p {
+      font-size: 13px;
+      color: rgba(255,255,255,0.7);
+      margin-top: 4px;
+    }
+    .form-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--surface);
+      border-top: 1px solid var(--surface2);
+      padding: 12px 16px;
+      padding-bottom: max(12px, env(safe-area-inset-bottom));
+      z-index: 20;
+    }
+    .form-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 8px;
+    }
+    .form-row select {
+      flex: 1;
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid #3d3555;
+      border-radius: 8px;
+      padding: 8px;
+      font-size: 14px;
+      -webkit-appearance: none;
+    }
+    .input-row {
+      display: flex;
+      gap: 8px;
+    }
+    #todo-input {
+      flex: 1;
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid #3d3555;
+      border-radius: var(--radius);
+      padding: 12px 16px;
+      font-size: 16px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    #todo-input:focus { border-color: var(--accent); }
+    #todo-input::placeholder { color: var(--text2); }
+    .add-btn {
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .add-btn:active { background: #6b4faa; }
+    #todo-list { padding: 12px 16px; }
+    .section-header {
+      font-size: 13px;
+      color: var(--text2);
+      font-weight: 600;
+      padding: 12px 4px 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .done-header { margin-top: 8px; }
+    .todo-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      transition: opacity 0.2s;
+    }
+    .todo-card.done { opacity: 0.5; }
+    .todo-card.urgent { border-left: 3px solid var(--danger); }
+    .todo-card.high { border-left: 3px solid var(--orange); }
+    .todo-main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px;
+      cursor: pointer;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    .todo-main:active { background: var(--surface2); }
+    .checkbox {
+      width: 24px;
+      height: 24px;
+      border: 2px solid var(--text2);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .todo-card.done .checkbox {
+      background: var(--success);
+      border-color: var(--success);
+      color: white;
+    }
+    .todo-info { flex: 1; min-width: 0; }
+    .todo-title {
+      display: block;
+      font-size: 15px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+    .todo-card.done .todo-title { text-decoration: line-through; color: var(--text2); }
+    .todo-meta {
+      display: block;
+      font-size: 12px;
+      color: var(--text2);
+      margin-top: 2px;
+    }
+    .delete-btn {
+      background: none;
+      border: none;
+      color: var(--text2);
+      font-size: 20px;
+      padding: 14px;
+      cursor: pointer;
+      line-height: 1;
+    }
+    .delete-btn:active { color: var(--danger); }
+    .empty {
+      text-align: center;
+      color: var(--text2);
+      padding: 60px 20px;
+      font-size: 15px;
+    }
+    .toast {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(-100px);
+      background: var(--surface2);
+      color: var(--text);
+      padding: 12px 24px;
+      border-radius: var(--radius);
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 100;
+      transition: transform 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    }
+    .toast.show { transform: translateX(-50%) translateY(0); }
+    .toast.success { border: 1px solid var(--success); }
+    .toast.error { border: 1px solid var(--danger); }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>待办同步</h1>
+    <p>输入任务，实时同步到桌面助手</p>
+  </header>
+  <div id="status-bar" style="background:#2d2741;padding:8px 16px;font-size:13px;color:#9b8fb8;text-align:center;">连接中...</div>
+  <div id="todo-list"></div>
+  <form class="form-bar" id="add-form">
+    <div class="form-row">
+      <select id="task-type">
+        <option value="temporary">临时任务</option>
+        <option value="daily">日常任务</option>
+      </select>
+      <select id="priority">
+        <option value="normal">普通</option>
+        <option value="high">重要</option>
+        <option value="urgent">紧急</option>
+        <option value="low">低</option>
+      </select>
+    </div>
+    <div class="input-row">
+      <input type="text" id="todo-input" placeholder="输入待办任务..." autocomplete="off" required>
+      <button type="submit" class="add-btn">添加</button>
+    </div>
+  </form>
+  <div class="toast" id="toast"></div>
+  <script src="./app.js"></script>
+</body>
+</html>

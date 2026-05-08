@@ -103,6 +103,7 @@ class SupabaseSyncService:
         self._device_id = _load_or_create_device_id(
             _default_device_id_path(device_id_path),
         )
+        self._known_remote_ids: set[str] = set()
 
     @property
     def device_id(self) -> str:
@@ -134,14 +135,27 @@ class SupabaseSyncService:
         remote_map: dict[str, dict] = {r["id"]: r for r in remote_rows}
         local_map: dict[str, TodoItem] = {item.id: item for item in local_items}
 
+        if not remote_rows and local_items and self._known_remote_ids:
+            return local_items, {
+                "local_count": len(local_items),
+                "remote_count": 0,
+                "merged_count": len(local_items),
+                "pushed_count": 0,
+                "skipped": "remote_empty_possibly_network_error",
+            }
+
         merged: dict[str, TodoItem] = {}
         upsert_rows: list[dict] = []
+        delete_ids: list[str] = []
 
         for item_id, local in local_map.items():
             remote = remote_map.get(item_id)
             if remote is None:
-                merged[item_id] = local
-                upsert_rows.append(todo_to_row(local, self._device_id))
+                if item_id in self._known_remote_ids:
+                    delete_ids.append(item_id)
+                else:
+                    merged[item_id] = local
+                    upsert_rows.append(todo_to_row(local, self._device_id))
             else:
                 remote_ts = _parse_ts(remote.get("updated_at"))
                 local_ts = _parse_ts(local.updated_at)
@@ -158,11 +172,14 @@ class SupabaseSyncService:
         if upsert_rows:
             self._client.table("todos").upsert(upsert_rows).execute()
 
+        self._known_remote_ids = set(remote_map.keys())
+
         stats = {
             "local_count": len(local_items),
             "remote_count": len(remote_rows),
             "merged_count": len(merged),
             "pushed_count": len(upsert_rows),
+            "deleted_count": len(delete_ids),
         }
         logger.debug("Full sync stats: %s", stats)
         return sorted(merged.values(), key=lambda i: i.created_at), stats

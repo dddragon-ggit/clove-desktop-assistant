@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import threading
+
 from PySide6.QtCore import QEvent, QObject, QPoint, QThread, Qt, QTimer
 from PySide6.QtGui import QAction, QColor, QFont, QRegion
 from PySide6.QtWidgets import (
@@ -73,7 +75,7 @@ class AssistantShellWindow(ShellWorkspaceFlowMixin, ShellTodoMixin, ShellPagesMi
             | Qt.WindowType.NoDropShadowWindowHint
         )
         self.setAttribute(Qt.WidgetAttribute.WA_TranslucentBackground)
-        self.setMinimumSize(430, 360)
+        self.setMinimumSize(430, 480)
         self.setFont(QFont("Microsoft YaHei UI", 10))
 
         self.root = QFrame()
@@ -112,7 +114,7 @@ class AssistantShellWindow(ShellWorkspaceFlowMixin, ShellTodoMixin, ShellPagesMi
         QTimer.singleShot(1000, self._check_due_todo_reminders)
         QTimer.singleShot(2000, self._initial_sync)
         self.sync_timer = QTimer(self)
-        self.sync_timer.setInterval(15000)
+        self.sync_timer.setInterval(5000)
         self.sync_timer.timeout.connect(self._periodic_sync)
         self.sync_timer.start()
         self._ready = True
@@ -138,19 +140,18 @@ class AssistantShellWindow(ShellWorkspaceFlowMixin, ShellTodoMixin, ShellPagesMi
     def _initial_sync(self) -> None:
         if self.controller.sync_service is None:
             return
-        try:
-            self.controller.sync_todos()
-            self._refresh_home()
-        except Exception:
-            pass
+        threading.Thread(target=self._sync_pull_worker, daemon=True).start()
 
     def _periodic_sync(self) -> None:
         if self.controller.sync_service is None:
             return
+        threading.Thread(target=self._sync_pull_worker, daemon=True).start()
+
+    def _sync_pull_worker(self) -> None:
         try:
             stats = self.controller.sync_todos()
             if stats.get("merged_count", 0) > stats.get("local_count", 0):
-                self._refresh_home()
+                QTimer.singleShot(0, self._refresh_home)
         except Exception:
             pass
 
@@ -253,7 +254,7 @@ class AssistantShellWindow(ShellWorkspaceFlowMixin, ShellTodoMixin, ShellPagesMi
         available = screen.availableGeometry() if screen else self.geometry()
         margin = 16
         target_width = min(max(self.minimumWidth(), 520), max(self.minimumWidth(), available.width() - (margin * 2)))
-        target_height = min(max(self.minimumHeight(), 420), max(self.minimumHeight(), available.height() - (margin * 2)))
+        target_height = min(max(self.minimumHeight(), 560), max(self.minimumHeight(), available.height() - (margin * 2)))
         x = min(max(self.x(), available.left() + margin), available.right() - target_width - margin)
         y = min(max(self.y(), available.top() + margin), available.bottom() - target_height - margin)
         self.setGeometry(x, y, target_width, target_height)
@@ -314,7 +315,7 @@ class AssistantShellWindow(ShellWorkspaceFlowMixin, ShellTodoMixin, ShellPagesMi
         self.clearMask()
         self.setMinimumSize(0, 0)
         self.setMaximumSize(16777215, 16777215)
-        self.setMinimumSize(430, 360)
+        self.setMinimumSize(430, 480)
         if self.root.graphicsEffect() is None:
             self._apply_shadow()
         self.root_layout.setContentsMargins(16, 14, 16, 12)
@@ -487,7 +488,7 @@ class AssistantShellWindow(ShellWorkspaceFlowMixin, ShellTodoMixin, ShellPagesMi
         self.is_orb = False
         self._set_panel_window_mode()
         self.clearMask()
-        self.setMinimumSize(430, 360)
+        self.setMinimumSize(430, 480)
         if self.root.graphicsEffect() is None:
             self._apply_shadow()
         self.root_layout.setContentsMargins(16, 14, 16, 12)

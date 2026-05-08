@@ -260,7 +260,7 @@ class AssistantShellWindowTests(unittest.TestCase):
 
             self.assertFalse(window.is_orb)
             self.assertTrue(window.isVisible())
-            self.assertEqual((window.width(), window.height()), (520, 420))
+            self.assertEqual((window.width(), window.height()), (520, 480))
             self.assertIsNotNone(window.root.graphicsEffect())
             self.assertTrue(window.mask().isEmpty())
             image = window.grab().toImage()
@@ -299,7 +299,7 @@ class AssistantShellWindowTests(unittest.TestCase):
             self.assertFalse(window.is_orb)
             self.assertEqual(window.x(), 180)
             self.assertEqual(window.y(), 140)
-            self.assertEqual((window.width(), window.height()), (520, 420))
+            self.assertEqual((window.width(), window.height()), (520, 480))
             pet.close()
         finally:
             window.close()

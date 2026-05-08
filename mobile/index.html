@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="./manifest.json">
   <title>待办同步</title>
-  <script src="https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     :root {
@@ -210,6 +210,7 @@
     <h1>待办同步</h1>
     <p>输入任务，实时同步到桌面助手</p>
   </header>
+  <div id="status-bar" style="background:#2d2741;padding:8px 16px;font-size:13px;color:#9b8fb8;text-align:center;">连接中...</div>
   <div id="todo-list"></div>
   <form class="form-bar" id="add-form">
     <div class="form-row">

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import threading
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from uuid import uuid4
@@ -341,6 +342,9 @@ class AssistantShellController:
     def _sync_push(self, item: TodoItem | None) -> None:
         if item is None or self.sync_service is None:
             return
+        threading.Thread(target=self._sync_push_worker, args=(item,), daemon=True).start()
+
+    def _sync_push_worker(self, item: TodoItem) -> None:
         try:
             self.sync_service.push_item(item)
         except Exception:
@@ -349,6 +353,9 @@ class AssistantShellController:
     def _sync_delete(self, item_id: str) -> None:
         if self.sync_service is None:
             return
+        threading.Thread(target=self._sync_delete_worker, args=(item_id,), daemon=True).start()
+
+    def _sync_delete_worker(self, item_id: str) -> None:
         try:
             self.sync_service.delete_item(item_id)
         except Exception:
@@ -359,6 +366,13 @@ class AssistantShellController:
             return {"error": "sync not configured"}
         local_items = self.todo_store.load()
         merged, stats = self.sync_service.full_sync(local_items)
+        if stats.get("skipped"):
+            return stats
+        delete_ids = stats.get("deleted_count", 0)
+        if delete_ids:
+            for item in local_items:
+                if item.id not in {m.id for m in merged}:
+                    self.todo_store.delete(item.id)
         self.todo_store.save(merged)
         return stats
 

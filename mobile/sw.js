@@ -1,4 +1,4 @@
-const CACHE_NAME = "todo-sync-v1";
+const CACHE_NAME = "todo-sync-v4";
 const ASSETS = ["./index.html", "./app.js", "./manifest.json"];
 
 self.addEventListener("install", (e) => {

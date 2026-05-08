@@ -16,52 +16,64 @@ function initDeviceId() {
 
 function initSupabase() {
   if (typeof supabase === "undefined") {
-    console.error("Supabase JS not loaded");
+    showToast("Supabase JS 加载失败，请检查网络", "error");
     return false;
   }
-  client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-  return true;
+  try {
+    client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    return true;
+  } catch (e) {
+    showToast("Supabase 连接失败: " + e.message, "error");
+    return false;
+  }
 }
 
 async function loadTodos() {
   if (!client) return;
-  const { data, error } = await client
-    .from("todos")
-    .select("*")
-    .order("created_at", { ascending: false });
-  if (error) {
-    console.error("Load failed:", error);
-    return;
+  try {
+    const { data, error } = await client
+      .from("todos")
+      .select("*")
+      .order("created_at", { ascending: false });
+    if (error) {
+      showToast("加载失败: " + error.message, "error");
+      return;
+    }
+    todos = data || [];
+    renderTodos();
+  } catch (e) {
+    showToast("网络错误: " + e.message, "error");
   }
-  todos = data || [];
-  renderTodos();
 }
 
 async function addTodo(title, taskType, priority) {
   if (!client || !title.trim()) return;
-  const now = new Date().toISOString();
-  const todo = {
-    id: crypto.randomUUID ? crypto.randomUUID() : "todo-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8),
-    title: title.trim(),
-    description: "",
-    status: "open",
-    priority: priority || "normal",
-    task_type: taskType || "temporary",
-    important: priority === "high" || priority === "urgent",
-    needs_computer: false,
-    created_at: now,
-    updated_at: now,
-    device_id: deviceId,
-  };
-  const { error } = await client.from("todos").upsert(todo);
-  if (error) {
-    console.error("Add failed:", error);
-    showToast("添加失败", "error");
-    return;
+  try {
+    const now = new Date().toISOString();
+    const todo = {
+      id: crypto.randomUUID ? crypto.randomUUID() : "todo-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8),
+      title: title.trim(),
+      description: "",
+      status: "open",
+      priority: priority || "normal",
+      task_type: taskType || "temporary",
+      important: priority === "high" || priority === "urgent",
+      needs_computer: false,
+      created_at: now,
+      updated_at: now,
+      device_id: deviceId,
+    };
+    const { error } = await client.from("todos").upsert(todo);
+    if (error) {
+      showToast("添加失败: " + error.message, "error");
+      return;
+    }
+    todos.unshift(todo);
+    renderTodos();
+    showToast("已添加并同步");
+  } catch (e) {
+    showToast("网络错误: " + e.message, "error");
   }
-  todos.unshift(todo);
-  renderTodos();
-  showToast("已添加并同步");
 }
 
 async function toggleDone(id, currentStatus) {
@@ -198,11 +210,28 @@ function setupRealtime() {
     .subscribe();
 }
 
+function setStatus(text, color) {
+  const bar = document.getElementById("status-bar");
+  if (bar) {
+    bar.textContent = text;
+    bar.style.color = color || "#9b8fb8";
+  }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   initDeviceId();
-  if (initSupabase()) {
+  if (typeof supabase === "undefined") {
+    setStatus("错误：Supabase JS 未加载，请检查网络", "#ef4444");
+    setupForm();
+    return;
+  }
+  try {
+    client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    setStatus("已连接 Supabase，正在加载...", "#22c55e");
     loadTodos();
     setupRealtime();
+  } catch (e) {
+    setStatus("连接失败: " + e.message, "#ef4444");
   }
   setupForm();
   if ("serviceWorker" in navigator) {

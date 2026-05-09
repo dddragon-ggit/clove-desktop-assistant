@@ -2,7 +2,6 @@ const SUPABASE_URL = "https://hqrzqipukyqyactkigga.supabase.co";
 const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxcnpxaXB1a3lxeWFjdGtpZ2dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNDA0MzQsImV4cCI6MjA5MzcxNjQzNH0.ZtnaZjZYsePcskl3z0m-O8l2bcsypdmJwVIs3Zj4qzo";
 const EDGE_FUNCTION_URL = SUPABASE_URL + "/functions/v1/todos-api";
 
-let client = null;
 let todos = [];
 let currentFilter = "all";
 let searchQuery = "";
@@ -365,30 +364,6 @@ async function saveEditModal() {
   if (ok) closeEditModal();
 }
 
-// --- Realtime ---
-
-function setupRealtime() {
-  if (!client) return;
-  client
-    .channel("todos-changes")
-    .on("postgres_changes", { event: "*", schema: "public", table: "todos" }, (payload) => {
-      const row = payload.new || payload.old;
-      if (!row) return;
-      if (payload.eventType === "INSERT") {
-        if (!todos.find((t) => t.id === row.id)) {
-          todos.unshift(row);
-        }
-      } else if (payload.eventType === "UPDATE") {
-        const idx = todos.findIndex((t) => t.id === row.id);
-        if (idx >= 0) todos[idx] = row;
-        else todos.unshift(row);
-      } else if (payload.eventType === "DELETE") {
-        todos = todos.filter((t) => t.id !== row.id);
-      }
-      renderTodos();
-    })
-    .subscribe();
-}
 
 // --- Status ---
 
@@ -403,19 +378,15 @@ function setStatus(text, color) {
 // --- Init ---
 
 function initApp() {
-  if (typeof supabase !== "undefined") {
-    try {
-      client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-      setupRealtime();
-    } catch (e) {
-      console.error("Realtime init failed:", e);
-    }
-  }
-
   setStatus("正在连接...", "#f97316");
   loadTodos()
     .then(() => setStatus("已连接", "#22c55e"))
     .catch(() => setStatus("连接失败", "#ef4444"));
+
+  // Poll for changes every 10 seconds (Realtime blocked by RLS)
+  setInterval(() => {
+    loadTodos();
+  }, 10000);
 
   setupForm();
   setupUI();

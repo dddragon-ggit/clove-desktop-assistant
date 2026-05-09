@@ -4,42 +4,92 @@ const EDGE_FUNCTION_URL = SUPABASE_URL + "/functions/v1/todos-api";
 
 let client = null;
 let todos = [];
-let deviceId = "";
 let currentFilter = "all";
 let searchQuery = "";
+let apiToken = "";
 
-// --- Device ID ---
+// --- Token Auth ---
 
-function initDeviceId() {
-  let id = localStorage.getItem("device_id");
-  if (!id) {
-    id = "mobile-" + Math.random().toString(36).slice(2, 14);
-    localStorage.setItem("device_id", id);
-  }
-  deviceId = id;
+function getStoredToken() {
+  return localStorage.getItem("api_token") || "";
 }
 
-// --- Edge Function API ---
+function storeToken(token) {
+  localStorage.setItem("api_token", token);
+  apiToken = token;
+}
 
-async function apiCall(action, data = {}) {
+async function validateToken(token) {
   try {
     const resp = await fetch(EDGE_FUNCTION_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${SUPABASE_KEY}`,
-        "X-Device-Id": deviceId,
+        "X-API-Token": token,
       },
-      body: JSON.stringify({ action, data }),
+      body: JSON.stringify({ action: "select", data: {} }),
     });
-    if (!resp.ok) {
-      const err = await resp.json().catch(() => ({}));
-      throw new Error(err.error || `HTTP ${resp.status}`);
-    }
-    return await resp.json();
-  } catch (e) {
-    throw e;
+    return resp.ok;
+  } catch {
+    return false;
   }
+}
+
+function showTokenScreen() {
+  document.getElementById("token-screen").classList.add("open");
+}
+
+function hideTokenScreen() {
+  document.getElementById("token-screen").classList.remove("open");
+}
+
+async function handleTokenSubmit() {
+  const input = document.getElementById("token-input");
+  const errorEl = document.getElementById("token-error");
+  const token = input.value.trim();
+
+  if (!token) {
+    errorEl.textContent = "请输入令牌";
+    errorEl.style.display = "block";
+    return;
+  }
+
+  const btn = document.getElementById("token-submit");
+  btn.textContent = "验证中...";
+  btn.disabled = true;
+
+  const valid = await validateToken(token);
+  if (valid) {
+    storeToken(token);
+    errorEl.style.display = "none";
+    hideTokenScreen();
+    initApp();
+  } else {
+    errorEl.textContent = "令牌无效，请重试";
+    errorEl.style.display = "block";
+    btn.textContent = "确认连接";
+    btn.disabled = false;
+  }
+}
+
+// --- Edge Function API ---
+
+async function apiCall(action, data = {}) {
+  const resp = await fetch(EDGE_FUNCTION_URL, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${SUPABASE_KEY}`,
+      "X-API-Token": apiToken,
+    },
+    body: JSON.stringify({ action, data }),
+  });
+  if (!resp.ok) {
+    const err = await resp.json().catch(() => ({}));
+    throw new Error(err.error || `HTTP ${resp.status}`);
+  }
+  return await resp.json();
 }
 
 // --- Data ---
@@ -315,7 +365,6 @@ function setupRealtime() {
     .on("postgres_changes", { event: "*", schema: "public", table: "todos" }, (payload) => {
       const row = payload.new || payload.old;
       if (!row) return;
-      if (row.device_id === deviceId) return;
       if (payload.eventType === "INSERT") {
         if (!todos.find((t) => t.id === row.id)) {
           todos.unshift(row);
@@ -344,10 +393,7 @@ function setStatus(text, color) {
 
 // --- Init ---
 
-document.addEventListener("DOMContentLoaded", () => {
-  initDeviceId();
-
-  // Supabase client only for Realtime
+function initApp() {
   if (typeof supabase !== "undefined") {
     try {
       client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
@@ -368,6 +414,25 @@ document.addEventListener("DOMContentLoaded", () => {
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
   }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  apiToken = getStoredToken();
+
+  if (apiToken) {
+    hideTokenScreen();
+    initApp();
+  } else {
+    showTokenScreen();
+  }
+
+  document.getElementById("token-submit").addEventListener("click", handleTokenSubmit);
+  document.getElementById("token-input").addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleTokenSubmit();
+    }
+  });
 });
 
 function setupForm() {

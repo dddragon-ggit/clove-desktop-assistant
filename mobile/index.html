@@ -369,9 +369,68 @@
     .btn-save:active { background: #6b4faa; }
     .btn-cancel { background: var(--surface2); color: var(--text); }
     .btn-cancel:active { background: #3d3555; }
+
+    /* Token Setup Screen */
+    .token-screen {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: var(--bg);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .token-screen.open { display: flex; }
+    .token-box {
+      background: var(--surface);
+      border-radius: 16px;
+      padding: 28px 24px;
+      width: 100%;
+      max-width: 380px;
+      text-align: center;
+    }
+    .token-box h2 { font-size: 20px; margin-bottom: 8px; }
+    .token-box p { font-size: 14px; color: var(--text2); margin-bottom: 20px; line-height: 1.5; }
+    .token-box input {
+      width: 100%;
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid #3d3555;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 15px;
+      outline: none;
+      margin-bottom: 14px;
+    }
+    .token-box input:focus { border-color: var(--accent); }
+    .token-box .error-msg { color: var(--danger); font-size: 13px; margin-bottom: 10px; display: none; }
+    .token-box button {
+      width: 100%;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .token-box button:active { background: #6b4faa; }
   </style>
 </head>
 <body>
+  <!-- Token Setup -->
+  <div class="token-screen open" id="token-screen">
+    <div class="token-box">
+      <h2>连接验证</h2>
+      <p>请输入访问令牌以连接待办服务</p>
+      <input type="password" id="token-input" placeholder="输入令牌..." autocomplete="off">
+      <div class="error-msg" id="token-error">令牌无效，请重试</div>
+      <button id="token-submit">确认连接</button>
+    </div>
+  </div>
+
   <header>
     <h1>待办同步</h1>
     <p>输入任务，实时同步到桌面助手</p>

@@ -5,7 +5,8 @@ import json
 from pathlib import Path
 
 from .adapters.fake import FakeContextProvider, FakeExecutor, FakePlanner, FakeReviewer
-from .adapters.openai_responses import OpenAIResponsesClient, ProviderResponseError, RealPlanner, RealReviewer
+from .adapters.openai_responses import ProviderResponseError, RealPlanner, RealReviewer
+from .adapters.provider_factory import create_client
 from .adapters.windows_executor import WindowsExecutor
 from .action_trust import ActionTrustStore
 from .capability.store import CapabilityStore
@@ -51,7 +52,7 @@ def build_orchestrator(
             "config_path": str(store.path),
             "loaded_from": "env" if store.config_from_env() is not None else "file",
         }
-        client = OpenAIResponsesClient(config)
+        client = create_client(config)
         planner = RealPlanner(client, capability_registry=capability_registry)
         reviewer = RealReviewer(client, capability_registry=capability_registry)
 

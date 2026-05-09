@@ -31,6 +31,7 @@ python -m unittest tests.test_ui_shell -v
 # Run targeted test subsets
 python -m unittest tests.test_ui_shell tests.test_ui_workspace_plan tests.test_ui_execution_feedback -v
 python -m unittest tests.test_windows_executor tests.test_openai_responses -v
+python -m unittest tests.test_provider_adapter -v
 
 # Quality evaluation (dry-run, no real desktop actions)
 python -m desktop_assistant.tools.real_smoke --ai-backend real
@@ -53,9 +54,21 @@ python -m desktop_assistant.tools.quality_eval --ai-backend real
 All external integrations are isolated here:
 - `fake_planner.py`, `fake_reviewer.py`, `fake_executor.py` — simulation adapters for development
 - `openai_responses.py`, `openai_planner.py`, `openai_reviewer.py` — real AI via OpenAI-compatible `responses` API
+- `anthropic_client.py` — Anthropic Messages API client (same `create_json_response` interface as OpenAI client)
+- `provider_factory.py` — Factory with `create_client(config)` routing and `auto_detect_wire_api()` probing
 - `windows_executor.py` + `windows_app_handlers.py` / `windows_file_actions.py` / `windows_window_actions.py` — real Windows desktop actions
 - `windows_app_discovery.py` — app scanning, caching, and inventory (`runtime/data/app_inventory.json`)
 - `web_query.py` — DuckDuckGo + weather queries for `answer_query` capability
+
+#### Provider Adapter Pattern
+
+Both `OpenAIResponsesClient` and `AnthropicClient` implement the same `create_json_response()` interface (formalized as `LLMClient` protocol in `provider_factory.py`). The factory selects the right client based on `config.wire_api` (`"responses"` or `"anthropic"`). Use `auto_detect_wire_api(config)` to probe which format a provider endpoint supports.
+
+Key differences:
+- **OpenAI**: `Authorization: Bearer` header, `/v1/responses` endpoint, native JSON schema via `text.format`
+- **Anthropic**: `x-api-key` header, `/v1/messages` endpoint, `system` as top-level field, `max_tokens` required, JSON schema embedded in system prompt
+
+The UI has a "模型设置" page in the menu for configuring providers with auto-detect and test-connection features.
 
 ### Domain Modules
 
@@ -131,6 +144,16 @@ A comprehensive code audit found 21 bugs. All 21 bugs (Critical through Low) wer
 - `workspace/service.py` — Added `ActionStep` type annotation to `_resource_from_step`
 - `adapters/fake_planner.py` — Replaced `assert` with `if/raise` in production code
 - `habits/journal.py` — `_last_activity_line` now reads file line-by-line instead of loading entire file
+
+## Recent Feature: Multi-Provider AI Adapter Layer (2026-05-09)
+
+Added support for both OpenAI Responses API and Anthropic Messages API providers. The adapter layer auto-detects which format a provider endpoint supports. Key files:
+- `adapters/anthropic_client.py` — Anthropic Messages API client
+- `adapters/provider_factory.py` — Factory with `create_client()`, `auto_detect_wire_api()`, `probe_provider()`
+- `ui/shell_provider_pages.py` — Provider settings UI page ("模型设置") with auto-detect and test-connection
+- `tests/test_provider_adapter.py` — 17 tests covering both clients and the factory
+
+Both clients share the `LLMClient` protocol with identical `create_json_response()` interface. `RealPlanner` and `RealReviewer` accept any `LLMClient` implementation.
 
 ## Recent Feature: Todo List Task Type Separation (2026-05-06)
 

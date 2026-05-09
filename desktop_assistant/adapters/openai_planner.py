@@ -3,7 +3,7 @@ from __future__ import annotations
 from ..capabilities import DEFAULT_CAPABILITY_REGISTRY, CapabilityRegistry
 from ..models import ContextSnapshot, PlannerResult, WorkflowRequest
 from ..prompting import PromptTemplateLibrary, load_app_inventory_summary
-from .openai_client import OpenAIResponsesClient
+from .provider_factory import LLMClient
 from .openai_planner_helpers import is_unsupported_destructive_file_request
 from .openai_planner_intent import OpenAIPlannerIntentMixin
 from .openai_planner_inventory import OpenAIPlannerInventoryMixin
@@ -23,7 +23,7 @@ class RealPlanner(
 
     def __init__(
         self,
-        client: OpenAIResponsesClient,
+        client: LLMClient,
         prompt_library: PromptTemplateLibrary | None = None,
         capability_registry: CapabilityRegistry | None = None,
         enable_fast_inventory: bool = True,

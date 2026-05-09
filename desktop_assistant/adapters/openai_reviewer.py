@@ -10,7 +10,7 @@ from ..models import (
     WorkflowRequest,
 )
 from ..prompting import PromptTemplateLibrary
-from .openai_client import OpenAIResponsesClient
+from .provider_factory import LLMClient
 from .openai_schemas import review_result_schema
 
 
@@ -19,7 +19,7 @@ class RealReviewer:
 
     def __init__(
         self,
-        client: OpenAIResponsesClient,
+        client: LLMClient,
         prompt_library: PromptTemplateLibrary | None = None,
         capability_registry: CapabilityRegistry | None = None,
     ) -> None:

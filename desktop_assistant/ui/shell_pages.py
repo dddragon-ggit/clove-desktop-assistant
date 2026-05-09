@@ -8,6 +8,7 @@ from . import shell_text as text
 from .shell_page_helpers import centered_title, page_header, prediction_input, shell_button
 from .shell_reminder_pages import build_reminder_settings_page
 from .shell_todo_pages import build_todo_detail_page, build_todo_page
+from .shell_provider_pages import build_provider_page
 from .shell_workspace_pages import build_workspace_confirm_page, build_workspace_page
 
 
@@ -28,6 +29,7 @@ class ShellPagesMixin:
         self.workspace_confirm_page = build_workspace_confirm_page(self)
         self.workspace_page = build_workspace_page(self)
         self.chat_page = self._build_chat_page()
+        self.provider_page = build_provider_page(self)
         for page in [
             self.glance_page,
             self.menu_page,
@@ -37,6 +39,7 @@ class ShellPagesMixin:
             self.workspace_confirm_page,
             self.workspace_page,
             self.chat_page,
+            self.provider_page,
         ]:
             self.stack.addWidget(page)
 
@@ -97,6 +100,7 @@ class ShellPagesMixin:
         layout.addWidget(shell_button(text.MENU_TODO, self._show_todo_page, "navButton"))
         layout.addWidget(shell_button(text.MENU_WORKSPACE, self._show_workspace_page, "navButton"))
         layout.addWidget(shell_button(text.MENU_CONTINUE, self._continue_from_prediction, "navButton"))
+        layout.addWidget(shell_button(text.PROVIDER_TITLE, self._show_provider_page, "navButton"))
         layout.addStretch(1)
         self.menu_input = prediction_input(self)
         layout.addWidget(self.menu_input)

@@ -247,6 +247,23 @@ class AssistantShellWindow(ShellWorkspaceFlowMixin, ShellTodoMixin, ShellPagesMi
         populate_reminder_settings(self, settings)
         self.reminder_settings_feedback.setText(shell_text.REMINDER_SETTINGS_RESET)
 
+    def _show_provider_page(self) -> None:
+        self._show_panel()
+        self._ensure_work_panel_size(min_width=520, min_height=500)
+        self.stack.setCurrentWidget(self.provider_page)
+
+    def _provider_save(self) -> None:
+        from .shell_provider_pages import _provider_save
+        _provider_save(self)
+
+    def _provider_auto_detect(self) -> None:
+        from .shell_provider_pages import _provider_auto_detect
+        _provider_auto_detect(self)
+
+    def _provider_test_connection(self) -> None:
+        from .shell_provider_pages import _provider_test_connection
+        _provider_test_connection(self)
+
     def _ensure_compact_panel_geometry(self) -> None:
         if self.is_orb:
             self._show_panel()

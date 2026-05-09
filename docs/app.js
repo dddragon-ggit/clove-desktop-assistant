@@ -30,8 +30,10 @@ async function validateToken(token) {
       },
       body: JSON.stringify({ action: "select", data: {} }),
     });
+    console.log("validateToken response:", resp.status, resp.ok);
     return resp.ok;
-  } catch {
+  } catch (e) {
+    console.error("validateToken error:", e);
     return false;
   }
 }
@@ -58,16 +60,23 @@ async function handleTokenSubmit() {
   const btn = document.getElementById("token-submit");
   btn.textContent = "验证中...";
   btn.disabled = true;
+  errorEl.style.display = "none";
 
-  const valid = await validateToken(token);
-  if (valid) {
-    storeToken(token);
-    errorEl.style.display = "none";
-    hideTokenScreen();
-    initApp();
-  } else {
-    errorEl.textContent = "令牌无效，请重试";
+  try {
+    const valid = await validateToken(token);
+    if (valid) {
+      storeToken(token);
+      hideTokenScreen();
+      initApp();
+    } else {
+      errorEl.textContent = "令牌无效，请重试";
+      errorEl.style.display = "block";
+    }
+  } catch (e) {
+    errorEl.textContent = "网络错误: " + e.message;
     errorEl.style.display = "block";
+    console.error("Token submit error:", e);
+  } finally {
     btn.textContent = "确认连接";
     btn.disabled = false;
   }

@@ -1,6 +1,20 @@
-const SUPABASE_URL = "https://hqrzqipukyqyactkigga.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxcnpxaXB1a3lxeWFjdGtpZ2dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNDA0MzQsImV4cCI6MjA5MzcxNjQzNH0.ZtnaZjZYsePcskl3z0m-O8l2bcsypdmJwVIs3Zj4qzo";
-const EDGE_FUNCTION_URL = SUPABASE_URL + "/functions/v1/todos-api";
+let SUPABASE_URL = "";
+let SUPABASE_KEY = "";
+let EDGE_FUNCTION_URL = "";
+
+function loadSupabaseConfig() {
+  SUPABASE_URL = localStorage.getItem("supabase_url") || "";
+  SUPABASE_KEY = localStorage.getItem("supabase_key") || "";
+  EDGE_FUNCTION_URL = SUPABASE_URL ? SUPABASE_URL + "/functions/v1/todos-api" : "";
+}
+
+function storeSupabaseConfig(url, key) {
+  localStorage.setItem("supabase_url", url);
+  localStorage.setItem("supabase_key", key);
+  SUPABASE_URL = url;
+  SUPABASE_KEY = key;
+  EDGE_FUNCTION_URL = url + "/functions/v1/todos-api";
+}
 
 let todos = [];
 let currentFilter = "all";
@@ -46,15 +60,21 @@ function hideTokenScreen() {
 }
 
 async function handleTokenSubmit() {
+  const urlInput = document.getElementById("cfg-url");
+  const keyInput = document.getElementById("cfg-key");
   const input = document.getElementById("token-input");
   const errorEl = document.getElementById("token-error");
+  const url = urlInput.value.trim();
+  const key = keyInput.value.trim();
   const token = input.value.trim();
 
-  if (!token) {
-    errorEl.textContent = "请输入令牌";
+  if (!url || !key || !token) {
+    errorEl.textContent = "请填写所有配置项";
     errorEl.style.display = "block";
     return;
   }
+
+  storeSupabaseConfig(url, key);
 
   const btn = document.getElementById("token-submit");
   btn.textContent = "验证中...";
@@ -401,9 +421,10 @@ function initApp() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  loadSupabaseConfig();
   apiToken = getStoredToken();
 
-  if (apiToken) {
+  if (SUPABASE_URL && SUPABASE_KEY && apiToken) {
     hideTokenScreen();
     initApp();
   } else {

@@ -423,10 +423,12 @@
   <!-- Token Setup -->
   <div class="token-screen open" id="token-screen">
     <div class="token-box">
-      <h2>连接验证</h2>
-      <p>请输入访问令牌以连接待办服务</p>
-      <input type="password" id="token-input" placeholder="输入令牌..." autocomplete="off">
-      <div class="error-msg" id="token-error">令牌无效，请重试</div>
+      <h2>连接设置</h2>
+      <p>请输入 Supabase 配置和访问令牌</p>
+      <input type="text" id="cfg-url" placeholder="Supabase URL" autocomplete="off">
+      <input type="text" id="cfg-key" placeholder="Supabase Anon Key" autocomplete="off">
+      <input type="password" id="token-input" placeholder="访问令牌 (API Token)" autocomplete="off">
+      <div class="error-msg" id="token-error">配置无效，请重试</div>
       <button id="token-submit">确认连接</button>
     </div>
   </div>

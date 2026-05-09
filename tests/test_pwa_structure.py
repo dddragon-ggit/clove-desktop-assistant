@@ -90,6 +90,14 @@ class TestPwaJsFunctions(unittest.TestCase):
         self.assertIn("debounce", js, "search debounce logic")
         self.assertIn("200", js, "200ms debounce delay")
 
+    def test_offline_detection_in_docs(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("navigator.onLine", js, "online status check")
+        self.assertIn("goOffline", js, "offline handler")
+        self.assertIn("goOnline", js, "online handler")
+        self.assertIn("startPolling", js, "polling start")
+        self.assertIn("stopPolling", js, "polling stop")
+
 
 if __name__ == "__main__":
     unittest.main()

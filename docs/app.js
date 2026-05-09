@@ -128,7 +128,9 @@ async function loadTodos() {
     todos = data || [];
     renderTodos();
   } catch (e) {
-    showToast("加载失败: " + e.message, "error");
+    if (navigator.onLine) {
+      showToast("加载失败: " + e.message, "error");
+    }
   }
 }
 
@@ -397,20 +399,63 @@ function setStatus(text, color) {
 
 // --- Init ---
 
-function initApp() {
-  setStatus("正在连接...", "#f97316");
-  loadTodos()
-    .then(() => setStatus("已连接", "#22c55e"))
-    .catch(() => setStatus("连接失败", "#ef4444"));
+let isOnline = navigator.onLine;
+let pollTimer = null;
 
-  // Poll for changes every 5 seconds (Realtime blocked by RLS)
-  setInterval(() => {
+function startPolling() {
+  if (pollTimer) return;
+  pollTimer = setInterval(() => {
+    if (!navigator.onLine) {
+      goOffline();
+      return;
+    }
     loadTodos().then(() => {
       const now = new Date();
       const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
       setStatus("已连接 · " + t, "#22c55e");
-    });
+    }).catch(() => {});
   }, 5000);
+}
+
+function stopPolling() {
+  if (pollTimer) {
+    clearInterval(pollTimer);
+    pollTimer = null;
+  }
+}
+
+function goOffline() {
+  isOnline = false;
+  stopPolling();
+  setStatus("已离线，等待网络恢复...", "#f97316");
+}
+
+function goOnline() {
+  isOnline = true;
+  setStatus("正在重新连接...", "#f97316");
+  loadTodos()
+    .then(() => {
+      const now = new Date();
+      const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      setStatus("已连接 · " + t, "#22c55e");
+    })
+    .catch(() => setStatus("连接失败", "#ef4444"));
+  startPolling();
+}
+
+function initApp() {
+  window.addEventListener("offline", goOffline);
+  window.addEventListener("online", goOnline);
+
+  if (!navigator.onLine) {
+    goOffline();
+  } else {
+    setStatus("正在连接...", "#f97316");
+    loadTodos()
+      .then(() => setStatus("已连接", "#22c55e"))
+      .catch(() => setStatus("连接失败", "#ef4444"));
+    startPolling();
+  }
 
   setupForm();
   setupUI();

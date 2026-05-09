@@ -382,10 +382,14 @@ function initApp() {
     .then(() => setStatus("已连接", "#22c55e"))
     .catch(() => setStatus("连接失败", "#ef4444"));
 
-  // Poll for changes every 10 seconds (Realtime blocked by RLS)
+  // Poll for changes every 5 seconds (Realtime blocked by RLS)
   setInterval(() => {
-    loadTodos();
-  }, 10000);
+    loadTodos().then(() => {
+      const now = new Date();
+      const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
+      setStatus("已连接 · " + t, "#22c55e");
+    });
+  }, 5000);
 
   setupForm();
   setupUI();

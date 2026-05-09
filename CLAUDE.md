@@ -197,17 +197,19 @@ The `sync/` module provides cloud sync via Supabase (PostgreSQL). Config is stor
 - Desktop UI auto-syncs on startup and after each todo mutation
 - Supabase table: `todos` with RLS enabled, `allow_all` policy
 
-### PWA Mobile Client (`mobile/`)
+### PWA Mobile Client (`docs/`)
 
-Lightweight PWA for adding todos on the phone. Uses Supabase JS client (CDN) + Realtime for live updates.
+Lightweight PWA for adding todos on the phone. Also served via GitHub Pages. Uses Supabase Edge Function for CRUD, polling for sync.
 
 ```powershell
 # Local test (same WiFi network)
-python mobile/serve.py
+python docs/serve.py
 # Open http://<local-ip>:8080 on phone
 ```
 
 Files: `index.html`, `app.js`, `sw.js`, `manifest.json`, `serve.py`
+
+Supabase URL, anon key, and API token are entered by the user on first visit (stored in localStorage).
 
 #### PWA 连接排查
 

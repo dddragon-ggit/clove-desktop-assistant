@@ -1,7 +1,7 @@
 """Simple HTTP server for testing the PWA locally.
 
 Usage:
-    python mobile/serve.py
+    python docs/serve.py
     Then open http://localhost:8080 on your phone (same WiFi network).
 """
 import http.server

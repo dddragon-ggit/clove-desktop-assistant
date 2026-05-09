@@ -16,7 +16,9 @@
       "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_windows_executor)",
       "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_ui_shell)",
       "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_habits.NextActionPredictionTests.test_predictor_uses_same_hour_habit_when_not_current_context)",
-      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_openai_responses.OpenAIResponsesAdapterTests.test_primary_error_uses_single_fallback_path)"
+      "Bash(/d/anaconda3/envs/app/python.exe -m unittest tests.test_openai_responses.OpenAIResponsesAdapterTests.test_primary_error_uses_single_fallback_path)",
+      "Bash(python -c \"import secrets; print\\(secrets.token_urlsafe\\(32\\)\\)\")",
+      "Bash(npx supabase *)"
     ]
   }
 }

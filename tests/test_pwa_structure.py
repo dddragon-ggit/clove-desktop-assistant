@@ -7,7 +7,6 @@ import unittest
 from pathlib import Path
 
 DOCS_DIR = Path(__file__).resolve().parent.parent / "docs"
-MOBILE_DIR = Path(__file__).resolve().parent.parent / "mobile"
 
 
 class TestPwaHtmlStructure(unittest.TestCase):
@@ -90,30 +89,6 @@ class TestPwaJsFunctions(unittest.TestCase):
         js = self._read(DOCS_DIR)
         self.assertIn("debounce", js, "search debounce logic")
         self.assertIn("200", js, "200ms debounce delay")
-
-
-class TestDocsMobileSync(unittest.TestCase):
-    """Verify docs/ and mobile/ have identical HTML and JS."""
-
-    def test_html_identical(self):
-        docs_html = (DOCS_DIR / "index.html").read_text(encoding="utf-8")
-        mobile_html = (MOBILE_DIR / "index.html").read_text(encoding="utf-8")
-        self.assertEqual(docs_html, mobile_html, "index.html differs between docs/ and mobile/")
-
-    def test_js_identical(self):
-        docs_js = (DOCS_DIR / "app.js").read_text(encoding="utf-8")
-        mobile_js = (MOBILE_DIR / "app.js").read_text(encoding="utf-8")
-        self.assertEqual(docs_js, mobile_js, "app.js differs between docs/ and mobile/")
-
-    def test_sw_identical(self):
-        docs_sw = (DOCS_DIR / "sw.js").read_text(encoding="utf-8")
-        mobile_sw = (MOBILE_DIR / "sw.js").read_text(encoding="utf-8")
-        self.assertEqual(docs_sw, mobile_sw, "sw.js differs between docs/ and mobile/")
-
-    def test_manifest_identical(self):
-        docs_m = (DOCS_DIR / "manifest.json").read_text(encoding="utf-8")
-        mobile_m = (MOBILE_DIR / "manifest.json").read_text(encoding="utf-8")
-        self.assertEqual(docs_m, mobile_m, "manifest.json differs between docs/ and mobile/")
 
 
 if __name__ == "__main__":

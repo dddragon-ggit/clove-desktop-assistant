@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>PWA Feature Tests</title>
+  <style>
+    body { font-family: monospace; background: #1a1a2e; color: #e0e0e0; padding: 20px; }
+    .pass { color: #22c55e; }
+    .fail { color: #ef4444; }
+    .suite { margin: 16px 0; }
+    .suite h3 { color: #a78bfa; margin-bottom: 8px; }
+    #summary { font-size: 18px; margin-top: 20px; padding: 12px; border-radius: 8px; }
+    #summary.all-pass { background: rgba(34,197,94,0.2); }
+    #summary.has-fail { background: rgba(239,68,68,0.2); }
+  </style>
+</head>
+<body>
+  <h1>PWA Feature Tests</h1>
+  <div id="output"></div>
+  <div id="summary"></div>
+  <script>
+    // Minimal test framework
+    let passed = 0, failed = 0, currentSuite = "";
+    const output = document.getElementById("output");
+
+    function describe(name, fn) {
+      currentSuite = name;
+      const div = document.createElement("div");
+      div.className = "suite";
+      div.innerHTML = `<h3>${name}</h3>`;
+      output.appendChild(div);
+      fn();
+    }
+
+    function it(name, fn) {
+      try {
+        fn();
+        passed++;
+        const line = document.createElement("div");
+        line.className = "pass";
+        line.textContent = `  ✓ ${name}`;
+        output.appendChild(line);
+      } catch (e) {
+        failed++;
+        const line = document.createElement("div");
+        line.className = "fail";
+        line.textContent = `  ✗ ${name}: ${e.message}`;
+        output.appendChild(line);
+      }
+    }
+
+    function assert(condition, msg) {
+      if (!condition) throw new Error(msg || "Assertion failed");
+    }
+
+    function assertEqual(a, b, msg) {
+      if (a !== b) throw new Error(msg || `Expected ${JSON.stringify(b)}, got ${JSON.stringify(a)}`);
+    }
+
+    // --- Stub Supabase to avoid CDN dependency ---
+    window.supabase = {
+      createClient: () => ({
+        from: () => ({
+          select: () => ({ order: () => ({ data: [], error: null }) }),
+          upsert: () => ({ error: null }),
+          update: () => ({ eq: () => ({ error: null }) }),
+          delete: () => ({ eq: () => ({ error: null }) }),
+        }),
+        channel: () => ({
+          on: () => ({ subscribe: () => {} }),
+        }),
+      }),
+    };
+
+    // --- Load app.js functions ---
+    // We need to extract the pure functions. Since app.js auto-inits on DOMContentLoaded,
+    // we test the logic functions directly by redefining them here from the source.
+
+    // Copy pure functions from app.js
+    function priorityLabel(p) {
+      return { urgent: "紧急", high: "重要", normal: "普通", low: "低" }[p] || "普通";
+    }
+
+    function escapeHtml(s) {
+      const div = document.createElement("div");
+      div.textContent = s;
+      return div.innerHTML;
+    }
+
+    function formatDueDate(dueAt) {
+      if (!dueAt) return { text: "", overdue: false, soon: false };
+      const due = new Date(dueAt + "T23:59:59");
+      const now = new Date();
+      const diffMs = due.getTime() - now.getTime();
+      const diffDays = Math.ceil(diffMs / (1000 * 60 * 60 * 24));
+      if (diffDays < 0) return { text: `已过期${Math.abs(diffDays)}天`, overdue: true, soon: false };
+      if (diffDays === 0) return { text: "今天截止", overdue: true, soon: false };
+      if (diffDays === 1) return { text: "明天截止", overdue: false, soon: true };
+      if (diffDays <= 3) return { text: `${diffDays}天后截止`, overdue: false, soon: true };
+      return { text: `${dueAt.slice(5)} 截止`, overdue: false, soon: false };
+    }
+
+    function getFilteredTodos(todos, filter, query) {
+      let filtered = todos;
+      if (filter === "open") filtered = filtered.filter((t) => t.status === "open");
+      else if (filter === "daily") filtered = filtered.filter((t) => t.task_type === "daily" && t.status === "open");
+      else if (filter === "temporary") filtered = filtered.filter((t) => t.task_type === "temporary" && t.status === "open");
+      else if (filter === "done") filtered = filtered.filter((t) => t.status === "done");
+      if (query) {
+        const q = query.toLowerCase().trim();
+        filtered = filtered.filter(
+          (t) => t.title.toLowerCase().includes(q) || (t.description && t.description.toLowerCase().includes(q))
+        );
+      }
+      return filtered;
+    }
+
+    // --- Tests ---
+
+    describe("priorityLabel", () => {
+      it("returns 紧急 for urgent", () => assertEqual(priorityLabel("urgent"), "紧急"));
+      it("returns 重要 for high", () => assertEqual(priorityLabel("high"), "重要"));
+      it("returns 普通 for normal", () => assertEqual(priorityLabel("normal"), "普通"));
+      it("returns 低 for low", () => assertEqual(priorityLabel("low"), "低"));
+      it("returns 普通 for unknown", () => assertEqual(priorityLabel("xxx"), "普通"));
+    });
+
+    describe("escapeHtml", () => {
+      it("escapes < and >", () => assertEqual(escapeHtml("<script>"), "&lt;script&gt;"));
+      it("escapes &", () => assertEqual(escapeHtml("a&b"), "a&amp;b"));
+      it("escapes quotes", () => assertEqual(escapeHtml('"hi"'), "&quot;hi&quot;"));
+      it("passes plain text through", () => assertEqual(escapeHtml("hello"), "hello"));
+      it("handles empty string", () => assertEqual(escapeHtml(""), ""));
+    });
+
+    describe("formatDueDate", () => {
+      it("returns empty for null", () => {
+        const r = formatDueDate(null);
+        assertEqual(r.text, "");
+        assertEqual(r.overdue, false);
+      });
+
+      it("returns empty for empty string", () => {
+        const r = formatDueDate("");
+        assertEqual(r.text, "");
+      });
+
+      it("marks past dates as overdue", () => {
+        const r = formatDueDate("2020-01-01");
+        assert(r.overdue, "should be overdue");
+        assert(r.text.includes("已过期"), "should contain 已过期");
+      });
+
+      it("marks today as overdue", () => {
+        const today = new Date().toISOString().slice(0, 10);
+        const r = formatDueDate(today);
+        assertEqual(r.text, "今天截止");
+        assert(r.overdue, "today should be overdue");
+      });
+
+      it("marks tomorrow as soon", () => {
+        const tomorrow = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+        const r = formatDueDate(tomorrow);
+        assertEqual(r.text, "明天截止");
+        assert(r.soon, "tomorrow should be soon");
+        assert(!r.overdue, "tomorrow should not be overdue");
+      });
+
+      it("marks 3 days as soon", () => {
+        const d = new Date(Date.now() + 3 * 86400000).toISOString().slice(0, 10);
+        const r = formatDueDate(d);
+        assert(r.text.includes("3天后"), "should say 3天后");
+        assert(r.soon, "3 days should be soon");
+      });
+
+      it("shows date for far future", () => {
+        const d = new Date(Date.now() + 30 * 86400000).toISOString().slice(0, 10);
+        const r = formatDueDate(d);
+        assert(r.text.includes("截止"), "should contain 截止");
+        assert(!r.soon, "30 days should not be soon");
+        assert(!r.overdue, "30 days should not be overdue");
+      });
+    });
+
+    describe("getFilteredTodos", () => {
+      const sample = [
+        { id: "1", title: "买菜", status: "open", task_type: "daily", priority: "normal", description: "" },
+        { id: "2", title: "写代码", status: "open", task_type: "temporary", priority: "high", description: "完成PWA" },
+        { id: "3", title: "跑步", status: "done", task_type: "daily", priority: "normal", description: "" },
+        { id: "4", title: "看书", status: "open", task_type: "daily", priority: "low", description: "小说" },
+      ];
+
+      it("all returns all todos", () => assertEqual(getFilteredTodos(sample, "all", "").length, 4));
+      it("open returns only open", () => assertEqual(getFilteredTodos(sample, "open", "").length, 3));
+      it("done returns only done", () => assertEqual(getFilteredTodos(sample, "done", "").length, 1));
+      it("daily returns open daily", () => assertEqual(getFilteredTodos(sample, "daily", "").length, 2));
+      it("temporary returns open temporary", () => assertEqual(getFilteredTodos(sample, "temporary", "").length, 1));
+      it("search by title", () => assertEqual(getFilteredTodos(sample, "all", "买菜").length, 1));
+      it("search by description", () => assertEqual(getFilteredTodos(sample, "all", "PWA").length, 1));
+      it("search is case insensitive", () => assertEqual(getFilteredTodos(sample, "all", "pwa").length, 1));
+      it("search with no match", () => assertEqual(getFilteredTodos(sample, "all", "不存在").length, 0));
+      it("combined filter and search", () => assertEqual(getFilteredTodos(sample, "daily", "买").length, 1));
+    });
+
+    // --- Summary ---
+    const summary = document.getElementById("summary");
+    summary.textContent = `Results: ${passed} passed, ${failed} failed`;
+    summary.className = failed === 0 ? "all-pass" : "has-fail";
+  </script>
+</body>
+</html>

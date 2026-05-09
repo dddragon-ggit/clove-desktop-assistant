@@ -1,5 +1,6 @@
 const SUPABASE_URL = "https://hqrzqipukyqyactkigga.supabase.co";
-const SUPABASE_KEY = "sb_publishable_UhiGJpbt_8Fu4RmvESz0aw_b2J5er8c";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxcnpxaXB1a3lxeWFjdGtpZ2dhIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgxNDA0MzQsImV4cCI6MjA5MzcxNjQzNH0.ZtnaZjZYsePcskl3z0m-O8l2bcsypdmJwVIs3Zj4qzo";
+const EDGE_FUNCTION_URL = SUPABASE_URL + "/functions/v1/todos-api";
 
 let client = null;
 let todos = [];
@@ -18,44 +19,43 @@ function initDeviceId() {
   deviceId = id;
 }
 
-// --- Supabase ---
+// --- Edge Function API ---
 
-function initSupabase() {
-  if (typeof supabase === "undefined") {
-    showToast("Supabase JS 加载失败，请检查网络", "error");
-    return false;
-  }
+async function apiCall(action, data = {}) {
   try {
-    client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    return true;
+    const resp = await fetch(EDGE_FUNCTION_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${SUPABASE_KEY}`,
+        "X-Device-Id": deviceId,
+      },
+      body: JSON.stringify({ action, data }),
+    });
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.error || `HTTP ${resp.status}`);
+    }
+    return await resp.json();
   } catch (e) {
-    showToast("Supabase 连接失败: " + e.message, "error");
-    return false;
+    throw e;
   }
 }
 
 // --- Data ---
 
 async function loadTodos() {
-  if (!client) return;
   try {
-    const { data, error } = await client
-      .from("todos")
-      .select("*")
-      .order("created_at", { ascending: false });
-    if (error) {
-      showToast("加载失败: " + error.message, "error");
-      return;
-    }
+    const data = await apiCall("select");
     todos = data || [];
     renderTodos();
   } catch (e) {
-    showToast("网络错误: " + e.message, "error");
+    showToast("加载失败: " + e.message, "error");
   }
 }
 
 async function addTodo(title, taskType, priority, dueDate) {
-  if (!client || !title.trim()) return;
+  if (!title.trim()) return;
   try {
     const now = new Date().toISOString();
     const todo = {
@@ -70,81 +70,67 @@ async function addTodo(title, taskType, priority, dueDate) {
       due_at: dueDate || null,
       created_at: now,
       updated_at: now,
-      device_id: deviceId,
     };
-    const { error } = await client.from("todos").upsert(todo);
-    if (error) {
-      showToast("添加失败: " + error.message, "error");
-      return;
-    }
+    await apiCall("insert", todo);
     todos.unshift(todo);
     renderTodos();
     showToast("已添加并同步");
   } catch (e) {
-    showToast("网络错误: " + e.message, "error");
+    showToast("添加失败: " + e.message, "error");
   }
 }
 
 async function updateTodo(id, changes) {
-  if (!client) return;
   try {
     const now = new Date().toISOString();
     changes.updated_at = now;
-    changes.device_id = deviceId;
     if (changes.priority) {
       changes.important = changes.priority === "high" || changes.priority === "urgent";
     }
-    const { error } = await client.from("todos").update(changes).eq("id", id);
-    if (error) {
-      showToast("更新失败: " + error.message, "error");
-      return false;
-    }
+    await apiCall("update", { id, ...changes });
     const todo = todos.find((t) => t.id === id);
     if (todo) Object.assign(todo, changes);
     renderTodos();
     showToast("已保存");
     return true;
   } catch (e) {
-    showToast("网络错误: " + e.message, "error");
+    showToast("更新失败: " + e.message, "error");
     return false;
   }
 }
 
 async function toggleDone(id, currentStatus) {
-  if (!client) return;
-  const now = new Date().toISOString();
-  const newStatus = currentStatus === "done" ? "open" : "done";
-  const updates = {
-    status: newStatus,
-    updated_at: now,
-    device_id: deviceId,
-  };
-  if (newStatus === "done") {
-    updates.completed_at = now;
-  } else {
-    updates.completed_at = null;
+  try {
+    const now = new Date().toISOString();
+    const newStatus = currentStatus === "done" ? "open" : "done";
+    const updates = {
+      status: newStatus,
+      updated_at: now,
+    };
+    if (newStatus === "done") {
+      updates.completed_at = now;
+    } else {
+      updates.completed_at = null;
+    }
+    await apiCall("update", { id, ...updates });
+    const todo = todos.find((t) => t.id === id);
+    if (todo) Object.assign(todo, updates);
+    renderTodos();
+  } catch (e) {
+    showToast("操作失败: " + e.message, "error");
   }
-  const { error } = await client.from("todos").update(updates).eq("id", id);
-  if (error) {
-    console.error("Toggle failed:", error);
-    return;
-  }
-  const todo = todos.find((t) => t.id === id);
-  if (todo) Object.assign(todo, updates);
-  renderTodos();
 }
 
 async function deleteTodo(id) {
-  if (!client) return;
   if (!confirm("确定删除？")) return;
-  const { error } = await client.from("todos").delete().eq("id", id);
-  if (error) {
-    console.error("Delete failed:", error);
-    return;
+  try {
+    await apiCall("delete", { id });
+    todos = todos.filter((t) => t.id !== id);
+    renderTodos();
+    showToast("已删除");
+  } catch (e) {
+    showToast("删除失败: " + e.message, "error");
   }
-  todos = todos.filter((t) => t.id !== id);
-  renderTodos();
-  showToast("已删除");
 }
 
 // --- Filter & Search ---
@@ -165,7 +151,6 @@ function setSearch(query) {
 function getFilteredTodos() {
   let filtered = todos;
 
-  // Apply filter
   if (currentFilter === "open") {
     filtered = filtered.filter((t) => t.status === "open");
   } else if (currentFilter === "daily") {
@@ -176,7 +161,6 @@ function getFilteredTodos() {
     filtered = filtered.filter((t) => t.status === "done");
   }
 
-  // Apply search
   if (searchQuery) {
     filtered = filtered.filter(
       (t) =>
@@ -362,22 +346,25 @@ function setStatus(text, color) {
 
 document.addEventListener("DOMContentLoaded", () => {
   initDeviceId();
-  if (typeof supabase === "undefined") {
-    setStatus("错误：Supabase JS 未加载，请检查网络", "#ef4444");
-    setupForm();
-    setupUI();
-    return;
+
+  // Supabase client only for Realtime
+  if (typeof supabase !== "undefined") {
+    try {
+      client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+      setupRealtime();
+    } catch (e) {
+      console.error("Realtime init failed:", e);
+    }
   }
-  try {
-    client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    setStatus("已连接 Supabase，正在加载...", "#22c55e");
-    loadTodos();
-    setupRealtime();
-  } catch (e) {
-    setStatus("连接失败: " + e.message, "#ef4444");
-  }
+
+  setStatus("正在连接...", "#f97316");
+  loadTodos()
+    .then(() => setStatus("已连接", "#22c55e"))
+    .catch(() => setStatus("连接失败", "#ef4444"));
+
   setupForm();
   setupUI();
+
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
   }
@@ -399,18 +386,15 @@ function setupForm() {
 }
 
 function setupUI() {
-  // Filter tabs
   document.querySelectorAll(".filter-tab").forEach((btn) => {
     btn.addEventListener("click", () => setFilter(btn.dataset.filter));
   });
-  // Search
   const searchInput = document.getElementById("search-input");
   let debounce = null;
   searchInput.addEventListener("input", () => {
     clearTimeout(debounce);
     debounce = setTimeout(() => setSearch(searchInput.value), 200);
   });
-  // Modal
   document.getElementById("modal-close").addEventListener("click", closeEditModal);
   document.getElementById("modal-cancel").addEventListener("click", closeEditModal);
   document.getElementById("modal-save").addEventListener("click", saveEditModal);

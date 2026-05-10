@@ -581,9 +581,33 @@ function switchSection(section) {
 
 // --- Notifications ---
 
-function requestNotificationPermission() {
-  if ("Notification" in window && Notification.permission === "default") {
-    Notification.requestPermission();
+function setupNotificationUI() {
+  if (!("Notification" in window)) return;
+  const status = Notification.permission;
+  if (status === "granted") return; // 已授权，不需要按钮
+  const bar = document.getElementById("status-bar");
+  if (!bar) return;
+  if (status === "default") {
+    const btn = document.createElement("button");
+    btn.textContent = "🔔 开启提醒";
+    btn.style.cssText = "margin-left:8px;background:var(--accent);color:white;border:none;border-radius:6px;padding:4px 10px;font-size:12px;cursor:pointer;";
+    btn.onclick = () => {
+      Notification.requestPermission().then((result) => {
+        if (result === "granted") {
+          btn.remove();
+          showToast("提醒已开启");
+        } else {
+          btn.textContent = "已拒绝";
+          btn.disabled = true;
+        }
+      });
+    };
+    bar.appendChild(btn);
+  } else if (status === "denied") {
+    const span = document.createElement("span");
+    span.textContent = " · 通知被拒绝，请在浏览器设置中开启";
+    span.style.color = "#f97316";
+    bar.appendChild(span);
   }
 }
 
@@ -606,18 +630,17 @@ function checkDueNotifications() {
       }
       const title = t.title;
       const body = tag;
-      // 优先用 Service Worker 通知（后台也能显示）
-      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+      if (navigator.serviceWorker) {
         navigator.serviceWorker.ready.then((reg) => {
           reg.showNotification(title, {
             body,
-            icon: "./manifest.json",
-            badge: "./manifest.json",
             tag: "todo-" + t.id,
             renotify: false,
           });
+        }).catch(() => {
+          new Notification(title, { body });
         });
-      } else if ("Notification" in window) {
+      } else {
         new Notification(title, { body });
       }
       notifiedTodoIds.add(t.id);
@@ -702,7 +725,7 @@ function initApp() {
   setupForm();
   setupUI();
   setupNotesUI();
-  requestNotificationPermission();
+  setupNotificationUI();
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");

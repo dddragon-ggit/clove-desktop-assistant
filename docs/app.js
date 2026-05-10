@@ -297,18 +297,14 @@ function renderNotes() {
 }
 
 function noteCard(n) {
-  const preview = n.content ? escapeHtml(n.content.slice(0, 80)) + (n.content.length > 80 ? "..." : "") : "";
-  const time = new Date(n.updated_at).toLocaleDateString("zh-CN", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  const time = new Date(n.updated_at).toLocaleDateString("zh-CN", { month: "short", day: "numeric" });
   return `
-    <div class="note-card" data-id="${n.id}">
-      <div class="note-main" onclick="openNoteEditModal('${n.id}')">
-        <div class="note-info">
-          <span class="note-title">${escapeHtml(n.title)}</span>
-          ${preview ? `<span class="note-preview">${preview}</span>` : ""}
-          <span class="note-time">${time}</span>
-        </div>
+    <div class="note-card" data-id="${n.id}" onclick="openNoteEditModal('${n.id}')">
+      <div class="note-card-inner">
+        <span class="note-card-title">${escapeHtml(n.title)}</span>
+        <span class="note-card-time">${time}</span>
       </div>
-      <button class="delete-btn" onclick="event.stopPropagation(); deleteNote('${n.id}')">&times;</button>
+      <button class="note-card-delete" onclick="event.stopPropagation(); deleteNote('${n.id}')">&times;</button>
     </div>`;
 }
 

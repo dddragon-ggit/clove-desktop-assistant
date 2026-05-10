@@ -441,32 +441,62 @@
       border-bottom-color: var(--accent);
     }
 
-    /* Note Cards */
+    /* Note Cards - Masonry Grid */
+    .notes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 16px 16px;
+    }
     .note-card {
       background: var(--surface);
       border-radius: var(--radius);
-      margin-bottom: 8px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+    .note-card:active { transform: scale(0.97); }
+    .note-card-inner {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .note-card-title {
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.4;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      word-break: break-word;
+    }
+    .note-card-time {
+      font-size: 11px;
+      color: var(--text2);
+    }
+    .note-card-delete {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0,0,0,0.5);
+      border: none;
+      color: var(--text2);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 16px;
+      cursor: pointer;
       display: flex;
       align-items: center;
-      overflow: hidden;
+      justify-content: center;
+      opacity: 0;
+      transition: opacity 0.2s;
     }
-    .note-main {
-      flex: 1;
-      padding: 14px;
-      cursor: pointer;
-      min-width: 0;
-    }
-    .note-main:active { background: var(--surface2); }
-    .note-info { display: flex; flex-direction: column; gap: 4px; }
-    .note-title { font-size: 15px; font-weight: 500; word-break: break-word; }
-    .note-preview {
-      font-size: 13px;
-      color: var(--text2);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-    .note-time { font-size: 12px; color: var(--text2); margin-top: 2px; }
+    .note-card:hover .note-card-delete,
+    .note-card:active .note-card-delete { opacity: 1; }
 
     /* Notes Toolbar */
     .notes-toolbar {
@@ -564,7 +594,7 @@
         <input type="file" id="note-import-input" accept=".json">
       </label>
     </div>
-    <div id="notes-list" style="padding:0 16px;"></div>
+    <div class="notes-grid" id="notes-list"></div>
   </div>
 
   <form class="form-bar" id="add-form">

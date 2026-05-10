@@ -43,6 +43,28 @@ class TestPwaHtmlStructure(unittest.TestCase):
         self.assertIn('data-filter="temporary"', html, "temporary filter tab")
         self.assertIn('data-filter="done"', html, "done filter tab")
 
+    def test_nav_tabs_in_docs(self):
+        html = self._read(DOCS_DIR, "index.html")
+        self._assert_element(html, 'data-section="todos"', "todos nav tab")
+        self._assert_element(html, 'data-section="notes"', "notes nav tab")
+
+    def test_notes_section_in_docs(self):
+        html = self._read(DOCS_DIR, "index.html")
+        self._assert_element(html, 'id="notes-section"', "notes section")
+        self._assert_element(html, 'id="notes-list"', "notes list")
+        self._assert_element(html, 'id="note-search-input"', "note search input")
+        self._assert_element(html, 'id="note-add-btn"', "note add button")
+        self._assert_element(html, 'id="note-export-btn"', "note export button")
+        self._assert_element(html, 'id="note-import-input"', "note import input")
+
+    def test_note_modal_in_docs(self):
+        html = self._read(DOCS_DIR, "index.html")
+        self._assert_element(html, 'id="note-modal"', "note modal overlay")
+        self._assert_element(html, 'id="note-edit-title"', "note edit title input")
+        self._assert_element(html, 'id="note-edit-content"', "note edit content textarea")
+        self._assert_element(html, 'id="note-modal-save"', "note modal save button")
+        self._assert_element(html, 'id="note-modal-cancel"', "note modal cancel button")
+
     def test_due_date_in_form(self):
         html = self._read(DOCS_DIR, "index.html")
         self._assert_element(html, 'id="due-date"', "due date input in add form")
@@ -97,6 +119,41 @@ class TestPwaJsFunctions(unittest.TestCase):
         self.assertIn("goOnline", js, "online handler")
         self.assertIn("startPolling", js, "polling start")
         self.assertIn("stopPolling", js, "polling stop")
+
+    def test_notes_crud_functions_in_docs(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("async function loadNotes(", js, "loadNotes function")
+        self.assertIn("async function addNote(", js, "addNote function")
+        self.assertIn("async function updateNote(", js, "updateNote function")
+        self.assertIn("async function deleteNote(", js, "deleteNote function")
+
+    def test_notes_rendering_in_docs(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("function renderNotes(", js, "renderNotes function")
+        self.assertIn("function noteCard(", js, "noteCard function")
+        self.assertIn("function getFilteredNotes(", js, "getFilteredNotes function")
+
+    def test_notes_export_import_in_docs(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("function exportNotes(", js, "exportNotes function")
+        self.assertIn("function importNotes(", js, "importNotes function")
+        self.assertIn("application/json", js, "JSON export mime type")
+
+    def test_notes_modal_functions_in_docs(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("function openNoteEditModal(", js, "openNoteEditModal function")
+        self.assertIn("function closeNoteEditModal(", js, "closeNoteEditModal function")
+        self.assertIn("function saveNoteEditModal(", js, "saveNoteEditModal function")
+        self.assertIn("function openNoteAddModal(", js, "openNoteAddModal function")
+
+    def test_section_switching_in_docs(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("function switchSection(", js, "switchSection function")
+        self.assertIn('currentSection', js, "currentSection state")
+
+    def test_notes_table_in_api_call(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("table", js, "table parameter in apiCall")
 
 
 if __name__ == "__main__":

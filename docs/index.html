@@ -417,6 +417,101 @@
       cursor: pointer;
     }
     .token-box button:active { background: #6b4faa; }
+
+    /* Nav Tabs */
+    .nav-tabs {
+      display: flex;
+      background: var(--surface);
+      border-bottom: 1px solid var(--surface2);
+    }
+    .nav-tab {
+      flex: 1;
+      background: none;
+      border: none;
+      color: var(--text2);
+      padding: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s;
+    }
+    .nav-tab.active {
+      color: var(--accent-light);
+      border-bottom-color: var(--accent);
+    }
+
+    /* Note Cards */
+    .note-card {
+      background: var(--surface);
+      border-radius: var(--radius);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+    .note-main {
+      flex: 1;
+      padding: 14px;
+      cursor: pointer;
+      min-width: 0;
+    }
+    .note-main:active { background: var(--surface2); }
+    .note-info { display: flex; flex-direction: column; gap: 4px; }
+    .note-title { font-size: 15px; font-weight: 500; word-break: break-word; }
+    .note-preview {
+      font-size: 13px;
+      color: var(--text2);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .note-time { font-size: 12px; color: var(--text2); margin-top: 2px; }
+
+    /* Notes Toolbar */
+    .notes-toolbar {
+      display: flex;
+      gap: 8px;
+      padding: 10px 16px;
+      align-items: center;
+    }
+    .notes-toolbar .search-input {
+      flex: 1;
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid #3d3555;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      outline: none;
+    }
+    .notes-toolbar .search-input:focus { border-color: var(--accent); }
+    .notes-toolbar .search-input::placeholder { color: var(--text2); }
+    .icon-btn {
+      background: var(--surface2);
+      border: none;
+      color: var(--text);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .icon-btn:active { background: var(--accent); }
+    .import-label {
+      position: relative;
+      overflow: hidden;
+    }
+    .import-label input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -434,21 +529,43 @@
   </div>
 
   <header>
-    <h1>待办同步</h1>
-    <p>输入任务，实时同步到桌面助手</p>
-    <div class="search-bar">
-      <input type="text" id="search-input" placeholder="搜索任务..." autocomplete="off">
-    </div>
+    <h1>待办 & 记事本</h1>
+    <p>任务管理 + 云端笔记</p>
   </header>
-  <div id="status-bar" style="background:#2d2741;padding:8px 16px;font-size:13px;color:#9b8fb8;text-align:center;">连接中...</div>
-  <div class="filter-tabs" id="filter-tabs">
-    <button class="filter-tab active" data-filter="all">全部</button>
-    <button class="filter-tab" data-filter="open">待办</button>
-    <button class="filter-tab" data-filter="daily">日常</button>
-    <button class="filter-tab" data-filter="temporary">临时</button>
-    <button class="filter-tab" data-filter="done">已完成</button>
+  <div class="nav-tabs">
+    <button class="nav-tab active" data-section="todos">待办</button>
+    <button class="nav-tab" data-section="notes">记事本</button>
   </div>
-  <div id="todo-list"></div>
+  <div id="status-bar" style="background:#2d2741;padding:8px 16px;font-size:13px;color:#9b8fb8;text-align:center;">连接中...</div>
+
+  <!-- Todo Section -->
+  <div id="todo-section">
+    <div class="search-bar" style="padding:10px 16px;">
+      <input type="text" id="search-input" placeholder="搜索任务..." autocomplete="off" style="flex:1;background:var(--surface2);color:var(--text);border:1px solid #3d3555;border-radius:8px;padding:8px 12px;font-size:14px;outline:none;">
+    </div>
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tab active" data-filter="all">全部</button>
+      <button class="filter-tab" data-filter="open">待办</button>
+      <button class="filter-tab" data-filter="daily">日常</button>
+      <button class="filter-tab" data-filter="temporary">临时</button>
+      <button class="filter-tab" data-filter="done">已完成</button>
+    </div>
+    <div id="todo-list"></div>
+  </div>
+
+  <!-- Notes Section -->
+  <div id="notes-section" style="display:none;">
+    <div class="notes-toolbar">
+      <input type="text" class="search-input" id="note-search-input" placeholder="搜索笔记..." autocomplete="off">
+      <button class="icon-btn" id="note-add-btn" title="新建笔记">+</button>
+      <button class="icon-btn" id="note-export-btn" title="导出">&#8615;</button>
+      <label class="icon-btn import-label" title="导入">
+        &#8613;
+        <input type="file" id="note-import-input" accept=".json">
+      </label>
+    </div>
+    <div id="notes-list" style="padding:0 16px;"></div>
+  </div>
 
   <form class="form-bar" id="add-form">
     <div class="form-row">
@@ -509,6 +626,29 @@
       <div class="modal-actions">
         <button class="btn-cancel" type="button" id="modal-cancel">取消</button>
         <button class="btn-save" type="button" id="modal-save">保存</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Note Edit Modal -->
+  <div class="modal-overlay" id="note-modal">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <h2>编辑笔记</h2>
+        <button class="modal-close" id="note-modal-close">&times;</button>
+      </div>
+      <input type="hidden" id="note-edit-id">
+      <div class="modal-field">
+        <label>标题</label>
+        <input type="text" id="note-edit-title" required>
+      </div>
+      <div class="modal-field">
+        <label>内容</label>
+        <textarea id="note-edit-content" rows="8" placeholder="写点什么..."></textarea>
+      </div>
+      <div class="modal-actions">
+        <button class="btn-cancel" type="button" id="note-modal-cancel">取消</button>
+        <button class="btn-save" type="button" id="note-modal-save">保存</button>
       </div>
     </div>
   </div>

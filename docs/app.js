@@ -17,8 +17,11 @@ function storeSupabaseConfig(url, key) {
 }
 
 let todos = [];
+let notes = [];
 let currentFilter = "all";
 let searchQuery = "";
+let noteSearchQuery = "";
+let currentSection = "todos"; // "todos" or "notes"
 let apiToken = "";
 
 // --- Token Auth ---
@@ -103,7 +106,7 @@ async function handleTokenSubmit() {
 
 // --- Edge Function API ---
 
-async function apiCall(action, data = {}) {
+async function apiCall(action, data = {}, table = "todos") {
   const resp = await fetch(EDGE_FUNCTION_URL, {
     method: "POST",
     headers: {
@@ -111,7 +114,7 @@ async function apiCall(action, data = {}) {
       "Authorization": `Bearer ${SUPABASE_KEY}`,
       "X-API-Token": apiToken,
     },
-    body: JSON.stringify({ action, data }),
+    body: JSON.stringify({ action, data, table }),
   });
   if (!resp.ok) {
     const err = await resp.json().catch(() => ({}));
@@ -211,6 +214,142 @@ async function deleteTodo(id) {
   } catch (e) {
     showToast("删除失败: " + e.message, "error");
   }
+}
+
+// --- Notes ---
+
+async function loadNotes() {
+  try {
+    const data = await apiCall("select", {}, "notes");
+    notes = data || [];
+    renderNotes();
+  } catch (e) {
+    if (navigator.onLine) {
+      showToast("加载笔记失败: " + e.message, "error");
+    }
+  }
+}
+
+async function addNote(title, content) {
+  if (!title.trim()) return;
+  try {
+    const now = new Date().toISOString();
+    const note = {
+      id: crypto.randomUUID ? crypto.randomUUID() : "note-" + Date.now() + "-" + Math.random().toString(36).slice(2, 8),
+      title: title.trim(),
+      content: content || "",
+      created_at: now,
+      updated_at: now,
+    };
+    await apiCall("insert", note, "notes");
+    notes.unshift(note);
+    renderNotes();
+    showToast("笔记已保存");
+  } catch (e) {
+    showToast("保存失败: " + e.message, "error");
+  }
+}
+
+async function updateNote(id, changes) {
+  try {
+    changes.updated_at = new Date().toISOString();
+    await apiCall("update", { id, ...changes }, "notes");
+    const note = notes.find((n) => n.id === id);
+    if (note) Object.assign(note, changes);
+    renderNotes();
+    showToast("已更新");
+  } catch (e) {
+    showToast("更新失败: " + e.message, "error");
+  }
+}
+
+async function deleteNote(id) {
+  if (!confirm("确定删除这条笔记？")) return;
+  try {
+    await apiCall("delete", { id }, "notes");
+    notes = notes.filter((n) => n.id !== id);
+    renderNotes();
+    showToast("已删除");
+  } catch (e) {
+    showToast("删除失败: " + e.message, "error");
+  }
+}
+
+function getFilteredNotes() {
+  if (!noteSearchQuery) return notes;
+  return notes.filter(
+    (n) =>
+      n.title.toLowerCase().includes(noteSearchQuery) ||
+      (n.content && n.content.toLowerCase().includes(noteSearchQuery))
+  );
+}
+
+function renderNotes() {
+  const list = document.getElementById("notes-list");
+  const filtered = getFilteredNotes();
+  let html = "";
+  if (filtered.length === 0) {
+    html = `<div class="empty">${noteSearchQuery ? "没有匹配的笔记" : "暂无笔记"}</div>`;
+  } else {
+    for (const n of filtered) html += noteCard(n);
+  }
+  list.innerHTML = html;
+}
+
+function noteCard(n) {
+  const preview = n.content ? escapeHtml(n.content.slice(0, 80)) + (n.content.length > 80 ? "..." : "") : "";
+  const time = new Date(n.updated_at).toLocaleDateString("zh-CN", { month: "short", day: "numeric", hour: "2-digit", minute: "2-digit" });
+  return `
+    <div class="note-card" data-id="${n.id}">
+      <div class="note-main" onclick="openNoteEditModal('${n.id}')">
+        <div class="note-info">
+          <span class="note-title">${escapeHtml(n.title)}</span>
+          ${preview ? `<span class="note-preview">${preview}</span>` : ""}
+          <span class="note-time">${time}</span>
+        </div>
+      </div>
+      <button class="delete-btn" onclick="event.stopPropagation(); deleteNote('${n.id}')">&times;</button>
+    </div>`;
+}
+
+function exportNotes() {
+  if (notes.length === 0) {
+    showToast("没有笔记可导出", "error");
+    return;
+  }
+  const blob = new Blob([JSON.stringify(notes, null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = `notes-${new Date().toISOString().slice(0, 10)}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast("已导出 " + notes.length + " 条笔记");
+}
+
+function importNotes(file) {
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    try {
+      const imported = JSON.parse(e.target.result);
+      if (!Array.isArray(imported)) {
+        showToast("文件格式错误", "error");
+        return;
+      }
+      let count = 0;
+      for (const note of imported) {
+        if (note.id && note.title) {
+          note.updated_at = new Date().toISOString();
+          await apiCall("upsert", note, "notes");
+          count++;
+        }
+      }
+      await loadNotes();
+      showToast("已导入 " + count + " 条笔记");
+    } catch (err) {
+      showToast("导入失败: " + err.message, "error");
+    }
+  };
+  reader.readAsText(file);
 }
 
 // --- Filter & Search ---
@@ -387,6 +526,60 @@ async function saveEditModal() {
 }
 
 
+// --- Note Edit Modal ---
+
+function openNoteEditModal(id) {
+  const note = notes.find((n) => n.id === id);
+  if (!note) return;
+  document.getElementById("note-edit-id").value = note.id;
+  document.getElementById("note-edit-title").value = note.title;
+  document.getElementById("note-edit-content").value = note.content || "";
+  document.getElementById("note-modal").classList.add("open");
+}
+
+function closeNoteEditModal() {
+  document.getElementById("note-modal").classList.remove("open");
+}
+
+async function saveNoteEditModal() {
+  const id = document.getElementById("note-edit-id").value;
+  const title = document.getElementById("note-edit-title").value.trim();
+  if (!title) {
+    showToast("标题不能为空", "error");
+    return;
+  }
+  const changes = {
+    title,
+    content: document.getElementById("note-edit-content").value,
+  };
+  if (id) {
+    await updateNote(id, changes);
+    closeNoteEditModal();
+  } else {
+    await addNote(title, changes.content);
+    closeNoteEditModal();
+  }
+}
+
+function openNoteAddModal() {
+  document.getElementById("note-edit-id").value = "";
+  document.getElementById("note-edit-title").value = "";
+  document.getElementById("note-edit-content").value = "";
+  document.getElementById("note-modal").classList.add("open");
+}
+
+// --- Section Switching ---
+
+function switchSection(section) {
+  currentSection = section;
+  document.querySelectorAll(".nav-tab").forEach((btn) => {
+    btn.classList.toggle("active", btn.dataset.section === section);
+  });
+  document.getElementById("todo-section").style.display = section === "todos" ? "" : "none";
+  document.getElementById("notes-section").style.display = section === "notes" ? "" : "none";
+  if (section === "notes") renderNotes();
+}
+
 // --- Status ---
 
 function setStatus(text, color) {
@@ -409,7 +602,7 @@ function startPolling() {
       goOffline();
       return;
     }
-    loadTodos().then(() => {
+    Promise.all([loadTodos(), loadNotes()]).then(() => {
       const now = new Date();
       const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
       setStatus("已连接 · " + t, "#22c55e");
@@ -433,7 +626,7 @@ function goOffline() {
 function goOnline() {
   isOnline = true;
   setStatus("正在重新连接...", "#f97316");
-  loadTodos()
+  Promise.all([loadTodos(), loadNotes()])
     .then(() => {
       const now = new Date();
       const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
@@ -451,7 +644,7 @@ function initApp() {
     goOffline();
   } else {
     setStatus("正在连接...", "#f97316");
-    loadTodos()
+    Promise.all([loadTodos(), loadNotes()])
       .then(() => setStatus("已连接", "#22c55e"))
       .catch(() => setStatus("连接失败", "#ef4444"));
     startPolling();
@@ -459,6 +652,7 @@ function initApp() {
 
   setupForm();
   setupUI();
+  setupNotesUI();
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
@@ -515,5 +709,32 @@ function setupUI() {
   document.getElementById("modal-save").addEventListener("click", saveEditModal);
   document.getElementById("edit-modal").addEventListener("click", (e) => {
     if (e.target === document.getElementById("edit-modal")) closeEditModal();
+  });
+}
+
+function setupNotesUI() {
+  document.querySelectorAll(".nav-tab").forEach((btn) => {
+    btn.addEventListener("click", () => switchSection(btn.dataset.section));
+  });
+  document.getElementById("note-add-btn").addEventListener("click", openNoteAddModal);
+  document.getElementById("note-modal-close").addEventListener("click", closeNoteEditModal);
+  document.getElementById("note-modal-cancel").addEventListener("click", closeNoteEditModal);
+  document.getElementById("note-modal-save").addEventListener("click", saveNoteEditModal);
+  document.getElementById("note-modal").addEventListener("click", (e) => {
+    if (e.target === document.getElementById("note-modal")) closeNoteEditModal();
+  });
+  document.getElementById("note-export-btn").addEventListener("click", exportNotes);
+  document.getElementById("note-import-input").addEventListener("change", (e) => {
+    if (e.target.files[0]) importNotes(e.target.files[0]);
+    e.target.value = "";
+  });
+  const noteSearchInput = document.getElementById("note-search-input");
+  let noteDebounce = null;
+  noteSearchInput.addEventListener("input", () => {
+    clearTimeout(noteDebounce);
+    noteDebounce = setTimeout(() => {
+      noteSearchQuery = noteSearchInput.value.toLowerCase().trim();
+      renderNotes();
+    }, 200);
   });
 }

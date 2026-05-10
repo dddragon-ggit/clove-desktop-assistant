@@ -25,7 +25,8 @@ Deno.serve(async (req) => {
     const supabaseUrl = Deno.env.get("SUPABASE_URL")!
     const serviceKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
 
-    const { action, data: payload } = await req.json()
+    const { action, data: payload, table: reqTable } = await req.json()
+    const table = reqTable === "notes" ? "notes" : "todos"
 
     const headers: Record<string, string> = {
       Authorization: `Bearer ${serviceKey}`,
@@ -37,25 +38,31 @@ Deno.serve(async (req) => {
     let result: Response
 
     if (action === "select") {
-      const url = `${supabaseUrl}/rest/v1/todos?select=*&order=created_at.desc`
+      const url = `${supabaseUrl}/rest/v1/${table}?select=*&order=updated_at.desc`
       result = await fetch(url, { headers })
     } else if (action === "insert") {
-      result = await fetch(`${supabaseUrl}/rest/v1/todos`, {
+      result = await fetch(`${supabaseUrl}/rest/v1/${table}`, {
         method: "POST",
         headers,
         body: JSON.stringify(payload),
       })
     } else if (action === "update") {
       const { id, ...updates } = payload
-      const url = `${supabaseUrl}/rest/v1/todos?id=eq.${id}`
+      const url = `${supabaseUrl}/rest/v1/${table}?id=eq.${id}`
       result = await fetch(url, {
         method: "PATCH",
         headers,
         body: JSON.stringify(updates),
       })
     } else if (action === "delete") {
-      const url = `${supabaseUrl}/rest/v1/todos?id=eq.${payload.id}`
+      const url = `${supabaseUrl}/rest/v1/${table}?id=eq.${payload.id}`
       result = await fetch(url, { method: "DELETE", headers })
+    } else if (action === "upsert") {
+      result = await fetch(`${supabaseUrl}/rest/v1/${table}`, {
+        method: "POST",
+        headers: { ...headers, Prefer: "return=representation,resolution=merge-duplicates" },
+        body: JSON.stringify(payload),
+      })
     } else {
       return new Response(
         JSON.stringify({ error: "Unknown action" }),

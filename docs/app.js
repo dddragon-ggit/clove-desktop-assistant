@@ -595,17 +595,31 @@ function checkDueNotifications() {
     const due = new Date(t.due_at + "T23:59:59");
     const diffMs = due.getTime() - now.getTime();
     const diffHours = diffMs / (1000 * 60 * 60);
-    // 通知条件：已过期 或 今天截止 或 24小时内截止
     if (diffHours <= 24) {
-      let body = "";
+      let tag = "";
       if (diffHours < 0) {
-        body = `已过期 ${Math.abs(Math.ceil(diffHours / 24))} 天`;
+        tag = `已过期 ${Math.abs(Math.ceil(diffHours / 24))} 天`;
       } else if (diffHours < 1) {
-        body = "即将截止";
+        tag = "即将截止";
       } else {
-        body = `${Math.ceil(diffHours)} 小时后截止`;
+        tag = `${Math.ceil(diffHours)} 小时后截止`;
       }
-      new Notification("待办提醒: " + t.title, { body, icon: "./manifest.json" });
+      const title = t.title;
+      const body = tag;
+      // 优先用 Service Worker 通知（后台也能显示）
+      if (navigator.serviceWorker && navigator.serviceWorker.controller) {
+        navigator.serviceWorker.ready.then((reg) => {
+          reg.showNotification(title, {
+            body,
+            icon: "./manifest.json",
+            badge: "./manifest.json",
+            tag: "todo-" + t.id,
+            renotify: false,
+          });
+        });
+      } else if ("Notification" in window) {
+        new Notification(title, { body });
+      }
       notifiedTodoIds.add(t.id);
     }
   }

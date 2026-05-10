@@ -620,28 +620,31 @@ function checkDueNotifications() {
     const diffMs = due.getTime() - now.getTime();
     const diffHours = diffMs / (1000 * 60 * 60);
     if (diffHours <= 24) {
-      let tag = "";
+      let dueText = "";
       if (diffHours < 0) {
-        tag = `已过期 ${Math.abs(Math.ceil(diffHours / 24))} 天`;
+        dueText = `已过期${Math.abs(Math.ceil(diffHours / 24))}天`;
       } else if (diffHours < 1) {
-        tag = "即将截止";
+        dueText = "即将截止";
       } else {
-        tag = `${Math.ceil(diffHours)} 小时后截止`;
+        dueText = `${Math.ceil(diffHours)}小时后截止`;
       }
-      const title = t.title;
-      const body = tag;
-      if (navigator.serviceWorker) {
-        navigator.serviceWorker.ready.then((reg) => {
-          reg.showNotification(title, {
-            body,
-            tag: "todo-" + t.id,
-            renotify: false,
+      const title = "⏰ " + t.title;
+      const body = dueText + " · " + (t.task_type === "daily" ? "日常任务" : "临时任务");
+      try {
+        if (navigator.serviceWorker) {
+          navigator.serviceWorker.ready.then((reg) => {
+            reg.showNotification(title, {
+              body: body,
+              tag: "due-" + t.id,
+              renotify: true,
+              requireInteraction: true,
+            });
           });
-        }).catch(() => {
-          new Notification(title, { body });
-        });
-      } else {
-        new Notification(title, { body });
+        } else {
+          new Notification(title, { body: body });
+        }
+      } catch (e) {
+        console.error("Notification error:", e);
       }
       notifiedTodoIds.add(t.id);
     }

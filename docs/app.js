@@ -23,6 +23,7 @@ let searchQuery = "";
 let noteSearchQuery = "";
 let currentSection = "todos"; // "todos" or "notes"
 let apiToken = "";
+let notifiedTodoIds = new Set(); // 已通知的待办 ID，避免重复提醒
 
 // --- Token Auth ---
 
@@ -198,6 +199,7 @@ async function toggleDone(id, currentStatus) {
     await apiCall("update", { id, ...updates });
     const todo = todos.find((t) => t.id === id);
     if (todo) Object.assign(todo, updates);
+    notifiedTodoIds.delete(id);
     renderTodos();
   } catch (e) {
     showToast("操作失败: " + e.message, "error");
@@ -209,6 +211,7 @@ async function deleteTodo(id) {
   try {
     await apiCall("delete", { id });
     todos = todos.filter((t) => t.id !== id);
+    notifiedTodoIds.delete(id);
     renderTodos();
     showToast("已删除");
   } catch (e) {
@@ -576,6 +579,38 @@ function switchSection(section) {
   if (section === "notes") renderNotes();
 }
 
+// --- Notifications ---
+
+function requestNotificationPermission() {
+  if ("Notification" in window && Notification.permission === "default") {
+    Notification.requestPermission();
+  }
+}
+
+function checkDueNotifications() {
+  if (!("Notification" in window) || Notification.permission !== "granted") return;
+  const now = new Date();
+  for (const t of todos) {
+    if (t.status !== "open" || !t.due_at || notifiedTodoIds.has(t.id)) continue;
+    const due = new Date(t.due_at + "T23:59:59");
+    const diffMs = due.getTime() - now.getTime();
+    const diffHours = diffMs / (1000 * 60 * 60);
+    // 通知条件：已过期 或 今天截止 或 24小时内截止
+    if (diffHours <= 24) {
+      let body = "";
+      if (diffHours < 0) {
+        body = `已过期 ${Math.abs(Math.ceil(diffHours / 24))} 天`;
+      } else if (diffHours < 1) {
+        body = "即将截止";
+      } else {
+        body = `${Math.ceil(diffHours)} 小时后截止`;
+      }
+      new Notification("待办提醒: " + t.title, { body, icon: "./manifest.json" });
+      notifiedTodoIds.add(t.id);
+    }
+  }
+}
+
 // --- Status ---
 
 function setStatus(text, color) {
@@ -599,6 +634,7 @@ function startPolling() {
       return;
     }
     Promise.all([loadTodos(), loadNotes()]).then(() => {
+      checkDueNotifications();
       const now = new Date();
       const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
       setStatus("已连接 · " + t, "#22c55e");
@@ -641,7 +677,10 @@ function initApp() {
   } else {
     setStatus("正在连接...", "#f97316");
     Promise.all([loadTodos(), loadNotes()])
-      .then(() => setStatus("已连接", "#22c55e"))
+      .then(() => {
+        checkDueNotifications();
+        setStatus("已连接", "#22c55e");
+      })
       .catch(() => setStatus("连接失败", "#ef4444"));
     startPolling();
   }
@@ -649,6 +688,7 @@ function initApp() {
   setupForm();
   setupUI();
   setupNotesUI();
+  requestNotificationPermission();
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");

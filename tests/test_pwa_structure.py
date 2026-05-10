@@ -155,6 +155,15 @@ class TestPwaJsFunctions(unittest.TestCase):
         js = self._read(DOCS_DIR)
         self.assertIn("table", js, "table parameter in apiCall")
 
+    def test_notification_functions_in_docs(self):
+        js = self._read(DOCS_DIR)
+        self.assertIn("function requestNotificationPermission(", js, "requestNotificationPermission function")
+        self.assertIn("function checkDueNotifications(", js, "checkDueNotifications function")
+        self.assertIn("Notification.permission", js, "notification permission check")
+        self.assertIn("new Notification(", js, "notification creation")
+        self.assertIn("notifiedTodoIds", js, "notified tracking set")
+        self.assertIn("待办提醒", js, "notification title text")
+
 
 if __name__ == "__main__":
     unittest.main()

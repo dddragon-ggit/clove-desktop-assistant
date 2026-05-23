@@ -24,6 +24,11 @@ let noteSearchQuery = "";
 let currentSection = "todos"; // "todos" or "notes"
 let apiToken = "";
 let notifiedTodoIds = new Set(); // 已通知的待办 ID，避免重复提醒
+const DAILY_AUTO_COMPLETE_HOUR = 23;
+const DAILY_AUTO_COMPLETE_MINUTE = 30;
+const DAILY_AUTO_COMPLETE_LAST_KEY = "daily_auto_complete_last_date";
+let dailyAutoCompleteTimer = null;
+let dailyAutoCompleteInProgress = false;
 
 // --- Token Auth ---
 
@@ -131,10 +136,12 @@ async function loadTodos() {
     const data = await apiCall("select");
     todos = data || [];
     renderTodos();
+    return true;
   } catch (e) {
     if (navigator.onLine) {
       showToast("加载失败: " + e.message, "error");
     }
+    return false;
   }
 }
 
@@ -186,6 +193,22 @@ async function updateTodo(id, changes) {
 async function toggleDone(id, currentStatus) {
   try {
     const now = new Date().toISOString();
+    const todo = todos.find((t) => t.id === id);
+    if (todo && todo.task_type === "daily") {
+      const updates = isDailyCompletedToday(todo)
+        ? {
+            status: "open",
+            completed_at: null,
+            daily_completed_on: null,
+            updated_at: now,
+          }
+        : dailyCompletionUpdates(new Date());
+      await apiCall("update", { id, ...updates });
+      Object.assign(todo, updates);
+      notifiedTodoIds.delete(id);
+      renderTodos();
+      return;
+    }
     const newStatus = currentStatus === "done" ? "open" : "done";
     const updates = {
       status: newStatus,
@@ -197,7 +220,6 @@ async function toggleDone(id, currentStatus) {
       updates.completed_at = null;
     }
     await apiCall("update", { id, ...updates });
-    const todo = todos.find((t) => t.id === id);
     if (todo) Object.assign(todo, updates);
     notifiedTodoIds.delete(id);
     renderTodos();
@@ -370,13 +392,13 @@ function getFilteredTodos() {
   let filtered = todos;
 
   if (currentFilter === "open") {
-    filtered = filtered.filter((t) => t.status === "open");
+    filtered = filtered.filter((t) => isOpenVisibleTodo(t));
   } else if (currentFilter === "daily") {
-    filtered = filtered.filter((t) => t.task_type === "daily" && t.status === "open");
+    filtered = filtered.filter((t) => t.task_type === "daily" && isOpenVisibleTodo(t));
   } else if (currentFilter === "temporary") {
-    filtered = filtered.filter((t) => t.task_type === "temporary" && t.status === "open");
+    filtered = filtered.filter((t) => t.task_type === "temporary" && isOpenVisibleTodo(t));
   } else if (currentFilter === "done") {
-    filtered = filtered.filter((t) => t.status === "done");
+    filtered = filtered.filter((t) => t.status === "done" || isDailyCompletedToday(t));
   }
 
   if (searchQuery) {
@@ -395,8 +417,8 @@ function getFilteredTodos() {
 function renderTodos() {
   const list = document.getElementById("todo-list");
   const filtered = getFilteredTodos();
-  const openTodos = filtered.filter((t) => t.status === "open");
-  const doneTodos = filtered.filter((t) => t.status === "done");
+  const openTodos = filtered.filter((t) => isOpenVisibleTodo(t));
+  const doneTodos = filtered.filter((t) => t.status === "done" || isDailyCompletedToday(t));
 
   let html = "";
   if (currentFilter === "done") {
@@ -429,7 +451,8 @@ function renderTodos() {
 function todoCard(t) {
   const priorityClass = t.priority === "urgent" ? "urgent" : t.priority === "high" ? "high" : "";
   const typeLabel = t.task_type === "daily" ? "日常" : "临时";
-  const doneClass = t.status === "done" ? "done" : "";
+  const isDone = t.status === "done" || isDailyCompletedToday(t);
+  const doneClass = isDone ? "done" : "";
   const dueInfo = formatDueDate(t.due_at);
   const overdueClass = dueInfo.overdue && t.status === "open" ? "overdue" : "";
 
@@ -443,7 +466,7 @@ function todoCard(t) {
   return `
     <div class="todo-card ${priorityClass} ${doneClass} ${overdueClass}" data-id="${t.id}">
       <div class="todo-main" onclick="toggleDone('${t.id}', '${t.status}')">
-        <span class="checkbox">${t.status === "done" ? "✓" : ""}</span>
+        <span class="checkbox">${isDone ? "✓" : ""}</span>
         <div class="todo-info">
           <span class="todo-title">${escapeHtml(t.title)}</span>
           ${descHtml}
@@ -477,6 +500,108 @@ function escapeHtml(s) {
   const div = document.createElement("div");
   div.textContent = s;
   return div.innerHTML;
+}
+
+// --- Daily Auto Complete ---
+
+function localDateKey(date = new Date()) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function isAfterDailyAutoCompleteTime(date = new Date()) {
+  const minutes = date.getHours() * 60 + date.getMinutes();
+  return minutes >= DAILY_AUTO_COMPLETE_HOUR * 60 + DAILY_AUTO_COMPLETE_MINUTE;
+}
+
+function isDailyCompletedToday(todo, date = new Date()) {
+  return todo.task_type === "daily" && todo.daily_completed_on === localDateKey(date);
+}
+
+function isOpenVisibleTodo(todo, date = new Date()) {
+  return todo.status === "open" && !isDailyCompletedToday(todo, date);
+}
+
+function dailyCompletionUpdates(date = new Date()) {
+  const now = date.toISOString();
+  return {
+    status: "open",
+    completed_at: now,
+    daily_completed_on: localDateKey(date),
+    daily_skipped_on: null,
+    snoozed_until: null,
+    reminder_repeat_count: 0,
+    updated_at: now,
+  };
+}
+
+async function autoCompleteDailyTodos({ force = false } = {}) {
+  if (dailyAutoCompleteInProgress) return;
+  if (!navigator.onLine || !apiToken) return;
+  const now = new Date();
+  const today = localDateKey(now);
+  if (!force && !isAfterDailyAutoCompleteTime(now)) return;
+  if (localStorage.getItem(DAILY_AUTO_COMPLETE_LAST_KEY) === today) return;
+
+  dailyAutoCompleteInProgress = true;
+  try {
+    const loaded = await loadTodos();
+    if (!loaded) return;
+
+    const dailyTodos = todos.filter(
+      (todo) =>
+        todo.task_type === "daily" &&
+        todo.status === "open" &&
+        todo.daily_completed_on !== today &&
+        todo.daily_skipped_on !== today
+    );
+    if (dailyTodos.length === 0) {
+      localStorage.setItem(DAILY_AUTO_COMPLETE_LAST_KEY, today);
+      return;
+    }
+
+    const updates = dailyCompletionUpdates(now);
+    let completed = 0;
+    for (const todo of dailyTodos) {
+      try {
+        await apiCall("update", { id: todo.id, ...updates });
+        Object.assign(todo, updates);
+        notifiedTodoIds.delete(todo.id);
+        completed++;
+      } catch (e) {
+        console.error("Daily auto-complete failed:", todo.id, e);
+      }
+    }
+
+    renderTodos();
+    if (completed === dailyTodos.length) {
+      localStorage.setItem(DAILY_AUTO_COMPLETE_LAST_KEY, today);
+      showToast(`已自动完成 ${completed} 个日常任务`);
+    } else if (completed > 0) {
+      showToast(`已自动完成 ${completed}/${dailyTodos.length} 个日常任务`, "error");
+    }
+  } finally {
+    dailyAutoCompleteInProgress = false;
+  }
+}
+
+function scheduleDailyAutoComplete() {
+  if (dailyAutoCompleteTimer) {
+    clearTimeout(dailyAutoCompleteTimer);
+  }
+
+  const now = new Date();
+  const next = new Date(now);
+  next.setHours(DAILY_AUTO_COMPLETE_HOUR, DAILY_AUTO_COMPLETE_MINUTE, 0, 0);
+  if (next <= now) {
+    next.setDate(next.getDate() + 1);
+  }
+
+  dailyAutoCompleteTimer = setTimeout(() => {
+    autoCompleteDailyTodos({ force: true }).finally(scheduleDailyAutoComplete);
+  }, next.getTime() - now.getTime());
 }
 
 // --- Toast ---
@@ -675,6 +800,7 @@ function startPolling() {
     }
     Promise.all([loadTodos(), loadNotes()]).then(() => {
       checkDueNotifications();
+      autoCompleteDailyTodos();
       const now = new Date();
       const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
       setStatus("已连接 · " + t, "#22c55e");
@@ -700,6 +826,7 @@ function goOnline() {
   setStatus("正在重新连接...", "#f97316");
   Promise.all([loadTodos(), loadNotes()])
     .then(() => {
+      autoCompleteDailyTodos();
       const now = new Date();
       const t = now.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", second: "2-digit" });
       setStatus("已连接 · " + t, "#22c55e");
@@ -719,6 +846,7 @@ function initApp() {
     Promise.all([loadTodos(), loadNotes()])
       .then(() => {
         checkDueNotifications();
+        autoCompleteDailyTodos();
         setStatus("已连接", "#22c55e");
       })
       .catch(() => setStatus("连接失败", "#ef4444"));
@@ -729,10 +857,21 @@ function initApp() {
   setupUI();
   setupNotesUI();
   setupNotificationUI();
+  setupDailyAutoComplete();
 
   if ("serviceWorker" in navigator) {
     navigator.serviceWorker.register("./sw.js");
   }
+}
+
+function setupDailyAutoComplete() {
+  scheduleDailyAutoComplete();
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) {
+      autoCompleteDailyTodos();
+      scheduleDailyAutoComplete();
+    }
+  });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
